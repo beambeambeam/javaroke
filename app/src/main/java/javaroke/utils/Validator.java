@@ -1,9 +1,10 @@
+package javaroke.utils;
+
 /**
  * Utility class for validating song IDs.
  * <p>
  * Ensures that song IDs are non-empty and do not contain spaces.
  */
-package javaroke.utils;
 
 public class Validator {
   /**
