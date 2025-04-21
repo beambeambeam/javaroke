@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NodeGrapTest {
+public class NodeGraphTest {
 
   @Test
   public void testConstructor() {
