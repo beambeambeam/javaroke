@@ -10,12 +10,12 @@ public class QueueLyric extends QueueAbstract<NodeLyric> {
   }
 
   // Other enqueue function that input as string
-  public void enqueue(String time, String line) {
+  public void enqueue(Integer time, String line) {
     enqueue(new NodeLyric(time, line));
   }
 
   // Other enqueueAtFront function that input as string
-  public void enqueueAtFront(String time, String line) {
+  public void enqueueAtFront(Integer time, String line) {
     enqueueAtFront(new NodeLyric(time, line));
   }
 

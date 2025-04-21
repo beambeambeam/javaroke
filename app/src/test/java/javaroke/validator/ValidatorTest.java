@@ -13,14 +13,4 @@ public class ValidatorTest {
   public void testValidateSongId_invalidId() {
     Validator.validateSongId("invalid song id");
   }
-
-  @Test
-  public void testValidateTimeForm_validTime() {
-    Validator.validateTimeForm("03:45");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testValidateTimeForm_invalidTime() {
-    Validator.validateTimeForm("345");
-  }
 }

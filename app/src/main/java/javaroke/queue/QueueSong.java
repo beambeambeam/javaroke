@@ -10,19 +10,18 @@ public class QueueSong extends QueueAbstract<NodeSong> {
   }
 
   // Other enqueue function that input as String
-  public void enqueue(String songId, String title, String artist, String duration) {
+  public void enqueue(String songId, String title, String artist, Integer duration) {
     enqueue(new NodeSong(songId, title, artist, duration));
   }
 
   // Other enqueueAtFront function that input as String
-  public void enqueueAtFront(String songId, String title, String artist, String duration) {
+  public void enqueueAtFront(String songId, String title, String artist, Integer duration) {
     enqueueAtFront(new NodeSong(songId, title, artist, duration));
   }
 
   // ------- Other Song function here... -------
 
-  // Return the all time to play all song in this queue
-  // May not do it now, cause we don't have the database yet.
+
   public int totalDuration() {
     return 0;
   }

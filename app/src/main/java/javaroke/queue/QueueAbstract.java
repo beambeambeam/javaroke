@@ -6,7 +6,11 @@ import java.util.NoSuchElementException;
 import javaroke.models.Node;
 
 /**
- * This class is an abstract implementation of a queue data structure in Java.
+ * This class is an abstract implementation of a queue data structure in Java. It provides basic
+ * queue operations such as enqueue, dequeue, and peek, as well as utility methods like isEmpty and
+ * size.
+ *
+ * @param <T> The type of elements held in this queue.
  */
 public abstract class QueueAbstract<T> implements Iterable<T> {
   private Node<T> front, rear;
