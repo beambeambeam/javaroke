@@ -8,48 +8,47 @@ import java.util.TreeSet;
 import javaroke.models.NodeGraph;
 
 public abstract class GraphAbstract {
-    /*
-     * numVertices: indicate the size of both adjacencyList and idList
-     * adjacencyList: be HashMap, use to keep map of all NodeGraph with idSong
-     * idList: be TreeSet, use to keep all idSong that sort by character
-     * 
-     * In normal use, we will only use adjacencyList to find all node
-     * But when we want to read adjacency Metrix, we have to use idList to make
-     * correct metrix cause hashMap order may not the same between adjacencyList
-     * order and in self Node order
-     */
-    protected int numVertices;
-    protected Map<String, NodeGraph> adjacencyList;
-    protected Set<String> idList;
+  /*
+   * numVertices: indicate the size of both adjacencyList and idList adjacencyList: be HashMap, use
+   * to keep map of all NodeGraph with idSong idList: be TreeSet, use to keep all idSong that sort
+   * by character
+   *
+   * In normal use, we will only use adjacencyList to find all node But when we want to read
+   * adjacency Metrix, we have to use idList to make correct metrix cause hashMap order may not the
+   * same between adjacencyList order and in self Node order
+   */
+  protected int numVertices;
+  protected Map<String, NodeGraph> adjacencyList;
+  protected Set<String> idList;
 
-    public GraphAbstract() {
-        this.numVertices = 0;
-        this.adjacencyList = new HashMap<>();
-        this.idList = new TreeSet<>();
+  public GraphAbstract() {
+    this.numVertices = 0;
+    this.adjacencyList = new HashMap<>();
+    this.idList = new TreeSet<>();
+  }
+
+  protected void addNode(String name) {
+    // HashMap containsKey O(1)
+    // But TreeSet is O(log n)
+    if (!adjacencyList.containsKey(name)) {
+      idList.add(name);
+      adjacencyList.put(name, new NodeGraph(name));
+      numVertices++;
     }
+  }
 
-    protected void addNode(String name) {
-        // HashMap containsKey O(1)
-        // But TreeSet is O(log n)
-        if (!adjacencyList.containsKey(name)) {
-            idList.add(name);
-            adjacencyList.put(name, new NodeGraph(name));
-            numVertices++;
-        }
-    }
+  public void showAdjacencyMatric() {
+    idList.forEach((idSongY) -> {
+      idList.forEach((idSongX) -> {
+        System.out.print(adjacencyList.get(idSongY).getEdges().stream()
+            .anyMatch(edge -> edge.getDestination().equals(idSongX)) ? "1 " : "0 ");
+      });
+      System.out.println();
+    });
+    adjacencyList.forEach((key, node) -> {
+      System.out.println("Node: " + key + ", Edges: " + node.getEdges());
+    });
+  }
 
-    public void showAdjacencyMatric() {
-        idList.forEach((idSongY) -> {
-            idList.forEach((idSongX) -> {
-                // adjacencyList.get(idSongY).getEdges();
-            });
-
-        });
-        adjacencyList.forEach((key, node) -> {
-
-            System.out.println("");
-        });
-    }
-
-    public abstract void addEdge(String source, String destination, int weight);
+  public abstract void addEdge(String source, String destination, int weight);
 }

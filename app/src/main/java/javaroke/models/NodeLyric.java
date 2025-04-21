@@ -3,30 +3,30 @@ package javaroke.models;
 import javaroke.utils.Validator;
 
 public class NodeLyric {
-    private String time;
-    private String line;
+  private String time;
+  private String line;
 
-    public NodeLyric(String time, String line) {
-        Validator.validateTimeForm(time);
-        this.time = time;
-        this.line = line;
-    }
+  public NodeLyric(String time, String line) {
+    Validator.validateTimeForm(time);
+    this.time = time;
+    this.line = line;
+  }
 
-    public String getTime() {
+  public String getTime() {
 
-        return time;
-    }
+    return time;
+  }
 
-    public String getline() {
-        return line;
-    }
+  public String getline() {
+    return line;
+  }
 
-    public void setTime(String time) {
-        Validator.validateTimeForm(time);
-        this.time = time;
-    }
+  public void setTime(String time) {
+    Validator.validateTimeForm(time);
+    this.time = time;
+  }
 
-    public void setLine(String line) {
-        this.line = line;
-    }
+  public void setLine(String line) {
+    this.line = line;
+  }
 }
