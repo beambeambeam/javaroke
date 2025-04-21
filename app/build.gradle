@@ -21,16 +21,21 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     // Use JUnit test framework.
     testImplementation libs.junit
 
     // This dependency is used by the application.
     implementation libs.guava
-    // Add JavaFX dependencies
-    implementation "org.openjfx:javafx-base:24.0.1"
-    implementation "org.openjfx:javafx-graphics:24.0.1"
-    implementation "org.openjfx:javafx-fxml:24.0.1"
+
+javafx {
+    version = "21"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+application {
+    mainClass = 'javaroke.Main'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -40,7 +45,15 @@ java {
     }
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = 'javaroke.Main'
+sourceSets {
+    main {
+        java {
+            srcDir 'app/src/main/java'
+        }
+    }
+    test {
+        java {
+            srcDir 'app/src/test/java'
+        }
+    }
 }
