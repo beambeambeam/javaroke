@@ -10,7 +10,7 @@ public class NodeLyric {
   /**
    * Represents a lyric node with a timestamp and a line of text.
    *
-   * @param time The timestamp of the lyric in milliseconds.
+   * @param time The timestamp of the lyric in seconds.
    * @param line The text of the lyric.
    */
   public NodeLyric(Integer time, String line) {
