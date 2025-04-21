@@ -19,8 +19,8 @@ public class Validator {
           "Invalid songId format: " + songId + "\nIt shouldn't have spaces.");
     }
 
-    if (songId.isEmpty()) {
-      throw new IllegalArgumentException("Invalid songId format: songId cannot be empty.");
+    if (songId == null || songId.isEmpty()) {
+      throw new IllegalArgumentException("Invalid songId format: songId cannot be null or empty.");
     }
   }
 }
