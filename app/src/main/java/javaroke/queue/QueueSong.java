@@ -21,8 +21,7 @@ public class QueueSong extends QueueAbstract<NodeSong> {
 
   // ------- Other Song function here... -------
 
-  // Return the all time to play all song in this queue
-  // May not do it now, cause we don't have the database yet.
+
   public int totalDuration() {
     return 0;
   }

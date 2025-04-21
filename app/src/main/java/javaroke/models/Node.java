@@ -3,6 +3,8 @@ package javaroke.models;
 /**
  * The `Node` class in Java represents a node in a linked list that stores data of type `T` and has
  * methods to get and set the data and the next node.
+ *
+ * @param <T> The type of data that the node will store.
  */
 public class Node<T> {
   private T data;
