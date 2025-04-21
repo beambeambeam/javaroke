@@ -1,6 +1,8 @@
-import dataStructures.QueueLyric;
-import dataStructures.QueueSong;
-import models.NodeLyric;
+package javaroke;
+
+import javaroke.queue.QueueLyric;
+import javaroke.queue.QueueSong;
+import javaroke.models.NodeLyric;
 
 public class Main {
     public static void main(String[] args) {

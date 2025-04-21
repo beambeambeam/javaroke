@@ -1,6 +1,6 @@
-package models;
+package javaroke.models;
 
-import utils.Validator;
+import javaroke.utils.Validator;
 
 public class Edge {
     private String destination;

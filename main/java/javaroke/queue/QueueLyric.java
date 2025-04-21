@@ -1,7 +1,7 @@
-package dataStructures;
+package javaroke.queue;
 
 import java.util.List;
-import models.NodeLyric;
+import javaroke.models.NodeLyric;
 
 public class QueueLyric extends QueueAbstract<NodeLyric> {
     // Set up Queue Lyric

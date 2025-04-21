@@ -1,6 +1,8 @@
+package javaroke;
+
 import org.junit.jupiter.api.Test;
 
-import dataStructures.QueueSong;
+import javaroke.queue.QueueSong;
 
 import static org.junit.jupiter.api.Assertions.*;
 

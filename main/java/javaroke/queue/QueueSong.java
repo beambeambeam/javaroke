@@ -1,7 +1,7 @@
-package dataStructures;
+package javaroke.queue;
 
 import java.util.List;
-import models.NodeSong;
+import javaroke.models.NodeSong;
 
 public class QueueSong extends QueueAbstract<NodeSong> {
     // Set up Queue Song

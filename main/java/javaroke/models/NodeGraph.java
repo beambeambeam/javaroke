@@ -1,8 +1,8 @@
-package models;
+package javaroke.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import utils.Validator;
+import javaroke.utils.Validator;
 
 public class NodeGraph {
     private String songId;

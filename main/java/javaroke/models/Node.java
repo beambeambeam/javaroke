@@ -1,4 +1,4 @@
-package models;
+package javaroke.models;
 
 // Node T to recieve T as each class data to keep
 // T may be NodeLyric Or NodeSong class

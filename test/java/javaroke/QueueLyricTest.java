@@ -1,7 +1,9 @@
+package javaroke;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import dataStructures.QueueLyric;
+import javaroke.queue.QueueLyric;
 
 public class QueueLyricTest {
     @Test

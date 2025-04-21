@@ -1,4 +1,4 @@
-package utils;
+package javaroke.utils;
 
 public class Validator {
     public static void validateSongId(String songId) {

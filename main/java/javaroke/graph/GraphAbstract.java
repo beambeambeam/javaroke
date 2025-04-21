@@ -1,11 +1,11 @@
-package dataStructures;
+package javaroke.graph;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import models.NodeGraph;
+import javaroke.models.NodeGraph;
 
 public abstract class GraphAbstract {
     /*

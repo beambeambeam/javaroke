@@ -1,9 +1,9 @@
-package dataStructures;
+package javaroke.queue;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import models.Node;
+import javaroke.models.Node;
 
 public abstract class QueueAbstract<T> implements Iterable<T> {
     private Node<T> front, rear;

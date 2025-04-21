@@ -1,6 +1,6 @@
-package dataStructures;
+package javaroke.graph;
 
-import models.Edge;
+import javaroke.models.Edge;
 
 public class DirectedGraph extends GraphAbstract {
     @Override
