@@ -1,16 +1,29 @@
 package javaroke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 // For queue test
 import javaroke.queue.QueueLyric;
 import javaroke.queue.QueueSong;
 import javaroke.models.NodeLyric;
 
-public class Main {
-  public static void main(String[] args) {
-    QueueLyricTest();
-    System.out.println("");
-    QueueSongTest();
+public class Main extends Application {
+  @Override
+  public void start(Stage stage) {
+    Label label = new Label("Hello, JavaFX!");
+    StackPane root = new StackPane(label);
+    Scene scene = new Scene(root, 400, 200);
+    stage.setScene(scene);
+    stage.setTitle("JavaFX App");
+    stage.show();
+  }
 
+  public static void main(String[] args) {
+    launch(args);
   }
 
   public static void QueueLyricTest() {
@@ -22,10 +35,12 @@ public class Main {
     queueLyric.enqueueAtFront(new NodeLyric("00:11", "dunno"));
     queueLyric.enqueueAtFront(new NodeLyric("00:13", "dunno2"));
 
-    System.out.println("QueueLyric test>>  " + queueLyric.peek().getTime() + " " + queueLyric.peek().getline());
+    System.out.println("QueueLyric test>> " + queueLyric.peek().getTime() + " " +
+        queueLyric.peek().getline());
     queueLyric.dequeue();
     queueLyric.dequeue();
-    System.out.println("QueueLyric test>>  " + queueLyric.peek().getTime() + " " + queueLyric.peek().getline());
+    System.out.println("QueueLyric test>> " + queueLyric.peek().getTime() + " " +
+        queueLyric.peek().getline());
   }
 
   public static void QueueSongTest() {
@@ -35,11 +50,11 @@ public class Main {
     queueSong.enqueue("hai-jai-mai-ook", "Hai Jai Mai Ook", "A2", "06:46");
     queueSong.enqueue("yak-tai", "Yak Tai", "A3", "00:01");
 
-    System.out.println("QueueSong test>>  " + queueSong.peek().getSongId() + ", "
+    System.out.println("QueueSong test>> " + queueSong.peek().getSongId() + ", "
         + queueSong.peek().getTitle() + ", " + queueSong.peek().getDuration());
     queueSong.dequeue();
     queueSong.dequeue();
-    System.out.println("QueueSong test>>  " + queueSong.peek().getSongId() + ", "
+    System.out.println("QueueSong test>> " + queueSong.peek().getSongId() + ", "
         + queueSong.peek().getTitle() + ", " + queueSong.peek().getDuration());
   }
 }
