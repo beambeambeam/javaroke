@@ -1,9 +1,7 @@
-package javaroke;
+package javaroke.queue;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import javaroke.queue.QueueLyric;
 
 public class QueueLyricTest {
   @Test
