@@ -6,170 +6,169 @@ import java.util.NoSuchElementException;
 import javaroke.models.Node;
 
 public abstract class QueueAbstract<T> implements Iterable<T> {
-    private Node<T> front, rear;
+  private Node<T> front, rear;
 
-    private int size;
+  private int size;
 
-    // Set Default Queue
-    public QueueAbstract() {
-        this.front = null;
-        this.rear = null;
-        this.size = 0;
+  // Set Default Queue
+  public QueueAbstract() {
+    this.front = null;
+    this.rear = null;
+    this.size = 0;
+  }
+
+  // Check node in Queue is Empty or not
+  public boolean isEmpty() {
+    return size == 0;
+  }
+
+  // Get size of Queue
+  public int size() {
+    return size;
+  }
+
+  // Enqueue data in the form as class T
+  public void enqueue(T data) {
+    // If input data is null, exist this enqueue process
+    if (data == null) {
+      return;
     }
 
-    // Check node in Queue is Empty or not
-    public boolean isEmpty() {
-        return size == 0;
+    // Create newNode as class T,and call Node() self setup function.
+    Node<T> newNode = new Node<T>(data);
+
+    // Main operation
+    if (isEmpty()) {
+      // Front = rear point at new node
+      front = rear = newNode;
+    } else {
+      // Connect rear.next to newNode, making newNode be lastest rear
+      rear.setNext(newNode);
+
+      // Move rear to newNode that live in the last rear of this liked list
+      rear = newNode;
     }
 
-    // Get size of Queue
-    public int size() {
-        return size;
+    // If endqueue function work correctly, plus size of queue by 1
+    size++;
+  }
+
+  // Enqueue data at front position in the form as class T
+  // Use for backward function, work parallel with history stack
+
+  // enqueueAtFront Option 2 with O(n).
+  // Be definitely Queue main process, FIFO at all
+  public void enqueueAtFront(T data) {
+    // If input data is null, exist this enqueue process
+    if (data == null) {
+      return;
     }
 
-    // Enqueue data in the form as class T
-    public void enqueue(T data) {
-        // If input data is null, exist this enqueue process
-        if (data == null) {
-            return;
-        }
+    // Main operation
+    if (isEmpty()) {
+      // Direct enqueue, cause it already has nothing inside
+      enqueue(data);
+    } else {
+      // Create new queue for tempo dump data from current queue
+      // Due to queue is abstract class now, have to use {} for make it be concrete
+      QueueAbstract<T> tempoQueue = new QueueAbstract<T>() {};
 
-        // Create newNode as class T,and call Node() self setup function.
-        Node<T> newNode = new Node<T>(data);
+      // Dump all data from current to tempoQueue
+      // Making current queue empty
+      while (!isEmpty()) {
+        tempoQueue.enqueue(dequeue());
+      }
 
-        // Main operation
-        if (isEmpty()) {
-            // Front = rear point at new node
-            front = rear = newNode;
-        } else {
-            // Connect rear.next to newNode, making newNode be lastest rear
-            rear.setNext(newNode);
+      // Enqueue data first
+      enqueue(data);
 
-            // Move rear to newNode that live in the last rear of this liked list
-            rear = newNode;
-        }
+      // Dump all old data from tempoQueue to current again
+      while (!tempoQueue.isEmpty()) {
+        enqueue(tempoQueue.dequeue());
+      }
+    }
+  }
 
-        // If endqueue function work correctly, plus size of queue by 1
-        size++;
+  // enqueueAtFront Option 2 with O(1).
+  // Still be Queue main process, but not FIFO at all
+  // public void enqueueAtFront(T data) {
+  // // Create newNode as class T,and call Node() self setup function.
+  // Node<T> newNode = new Node<T>(data);
+
+  // // Main operation
+  // if (isEmpty()) {
+  // // Front = rear point at new node
+  // front = rear = newNode;
+  // } else {
+  // // Connect newNode.next to front, making newNode be lastest front
+  // newNode.next = front;
+
+  // // Move front to newNode that live in the lastest front of this liked list
+  // front = newNode;
+  // }
+
+  // // If endqueue function work correctly, plus size of queue by 1
+  // size++;
+  // }
+
+  // Dequeue data return as class T
+  public T dequeue() {
+    // If this queue empty, end this dequeue operation and return as a null value
+    if (isEmpty()) {
+      return null;
     }
 
-    // Enqueue data at front position in the form as class T
-    // Use for backward function, work parallel with history stack
+    // Recieve Front data before move node pointer
+    T data = front.getData();
 
-    // enqueueAtFront Option 2 with O(n).
-    // Be definitely Queue main process, FIFO at all
-    public void enqueueAtFront(T data) {
-        // If input data is null, exist this enqueue process
-        if (data == null) {
-            return;
-        }
+    // Move front pointer to front.next
+    front = front.getNext();
 
-        // Main operation
-        if (isEmpty()) {
-            // Direct enqueue, cause it already has nothing inside
-            enqueue(data);
-        } else {
-            // Create new queue for tempo dump data from current queue
-            // Due to queue is abstract class now, have to use {} for make it be concrete
-            QueueAbstract<T> tempoQueue = new QueueAbstract<T>() {
-            };
+    // If dequeue function work correctly, reduce size of queue by 1
+    size--;
 
-            // Dump all data from current to tempoQueue
-            // Making current queue empty
-            while (!isEmpty()) {
-                tempoQueue.enqueue(dequeue());
-            }
-
-            // Enqueue data first
-            enqueue(data);
-
-            // Dump all old data from tempoQueue to current again
-            while (!tempoQueue.isEmpty()) {
-                enqueue(tempoQueue.dequeue());
-            }
-        }
+    // Set up pointer to default. when Front == null, Mean real must be null too
+    // Use to prevent future conflict in mis match pointer
+    if (front == null) {
+      rear = null;
     }
 
-    // enqueueAtFront Option 2 with O(1).
-    // Still be Queue main process, but not FIFO at all
-    // public void enqueueAtFront(T data) {
-    // // Create newNode as class T,and call Node() self setup function.
-    // Node<T> newNode = new Node<T>(data);
+    // Return Front data that keep before move pointer forward
+    return data;
+  }
 
-    // // Main operation
-    // if (isEmpty()) {
-    // // Front = rear point at new node
-    // front = rear = newNode;
-    // } else {
-    // // Connect newNode.next to front, making newNode be lastest front
-    // newNode.next = front;
+  // Check Current front data, return as class T
+  public T peek() {
+    // If this queue empty, end this peek operation and return as a null value
+    if (isEmpty()) {
+      return null;
+    }
 
-    // // Move front to newNode that live in the lastest front of this liked list
-    // front = newNode;
-    // }
+    // Return data in front node
+    return front.getData();
+  }
 
-    // // If endqueue function work correctly, plus size of queue by 1
-    // size++;
-    // }
+  // Add Iterator interface to this customize queue class
+  @Override
+  public Iterator<T> iterator() {
+    return new Iterator<T>() {
+      private Node<T> current = front;
 
-    // Dequeue data return as class T
-    public T dequeue() {
-        // If this queue empty, end this dequeue operation and return as a null value
-        if (isEmpty()) {
-            return null;
+      @Override
+      public boolean hasNext() {
+        return current != null;
+      }
+
+      @Override
+      public T next() {
+        if (!hasNext()) {
+          throw new NoSuchElementException();
         }
-
-        // Recieve Front data before move node pointer
-        T data = front.getData();
-
-        // Move front pointer to front.next
-        front = front.getNext();
-
-        // If dequeue function work correctly, reduce size of queue by 1
-        size--;
-
-        // Set up pointer to default. when Front == null, Mean real must be null too
-        // Use to prevent future conflict in mis match pointer
-        if (front == null) {
-            rear = null;
-        }
-
-        // Return Front data that keep before move pointer forward
+        T data = current.getData();
+        current = current.getNext();
         return data;
-    }
 
-    // Check Current front data, return as class T
-    public T peek() {
-        // If this queue empty, end this peek operation and return as a null value
-        if (isEmpty()) {
-            return null;
-        }
-
-        // Return data in front node
-        return front.getData();
-    }
-
-    // Add Iterator interface to this customize queue class
-    @Override
-    public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            private Node<T> current = front;
-
-            @Override
-            public boolean hasNext() {
-                return current != null;
-            }
-
-            @Override
-            public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                T data = current.getData();
-                current = current.getNext();
-                return data;
-
-            }
-        };
-    }
+      }
+    };
+  }
 }

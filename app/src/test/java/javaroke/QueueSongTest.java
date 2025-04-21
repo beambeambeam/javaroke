@@ -6,16 +6,18 @@ import static org.junit.Assert.*;
 import javaroke.queue.QueueSong;
 
 public class QueueSongTest {
-    @Test
-    public void testQueueSongEnqueue() {
-        QueueSong queueSong = new QueueSong();
+  @Test
+  public void testQueueSongEnqueue() {
+    QueueSong queueSong = new QueueSong();
 
-        queueSong.enqueue("Test-1", "Test 1", "Tester", "02:16");
+    queueSong.enqueue("Test-1", "Test 1", "Tester", "02:16");
 
-        assertEquals("enqueue failed at first in QueueSong extend", "Test-1", queueSong.peek().getSongId());
+    assertEquals("enqueue failed at first in QueueSong extend", "Test-1",
+        queueSong.peek().getSongId());
 
-        queueSong.enqueue("Test-2", "Test 2", "Tester", "01:32");
+    queueSong.enqueue("Test-2", "Test 2", "Tester", "01:32");
 
-        assertEquals("enqueue failed at 2nd++ in QueueSong extend", "Test-1", queueSong.peek().getSongId());
-    }
+    assertEquals("enqueue failed at 2nd++ in QueueSong extend", "Test-1",
+        queueSong.peek().getSongId());
+  }
 }
