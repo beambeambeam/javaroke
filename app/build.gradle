@@ -34,3 +34,16 @@ application {
     // Define the main class for the application.
     mainClass = 'javaroke.Main'
 }
+
+sourceSets {
+    main {
+        java {
+            srcDir 'app/src/main/java'
+        }
+    }
+    test {
+        java {
+            srcDir 'app/src/test/java'
+        }
+    }
+}
