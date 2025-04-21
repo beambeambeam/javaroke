@@ -1,10 +1,9 @@
 package javaroke;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import javaroke.queue.QueueSong;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class QueueSongTest {
     @Test
@@ -13,10 +12,10 @@ public class QueueSongTest {
 
         queueSong.enqueue("Test-1", "Test 1", "Tester", "02:16");
 
-        assertEquals("Test-1", queueSong.peek().getSongId(), "enqueue failed at first in QueueSong extend");
+        assertEquals("enqueue failed at first in QueueSong extend", "Test-1", queueSong.peek().getSongId());
 
         queueSong.enqueue("Test-2", "Test 2", "Tester", "01:32");
 
-        assertEquals("Test-1", queueSong.peek().getSongId(), "enqueue failed at 2nd++ in QueueSong extend");
+        assertEquals("enqueue failed at 2nd++ in QueueSong extend", "Test-1", queueSong.peek().getSongId());
     }
 }

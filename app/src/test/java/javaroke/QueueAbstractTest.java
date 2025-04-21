@@ -1,17 +1,16 @@
 package javaroke;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import javaroke.queue.QueueAbstract;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class QueueAbstractTest {
     @Test
     public void testQueueAbstractInitialize() {
         QueueAbstract<String> queue = new QueueAbstract<String>() {
         };
-        assertNotNull(queue, "queue initialize failed");
+        assertNotNull("queue initialize failed", queue);
     }
 
     @Test
@@ -19,23 +18,23 @@ public class QueueAbstractTest {
         QueueAbstract<String> queue = new QueueAbstract<String>() {
         };
 
-        assertEquals(0, queue.size(), "blank queue size failed");
+        assertEquals("blank queue size failed", 0, queue.size());
 
         queue.enqueue("Test 1");
         queue.enqueue("Test 1");
         queue.enqueue("Test 1");
         queue.enqueue("Test 1");
 
-        assertEquals(4, queue.size(), "enqueue size failed");
+        assertEquals("enqueue size failed", 4, queue.size());
 
         queue.dequeue();
 
-        assertEquals(3, queue.size(), "dequeue size failed");
+        assertEquals("dequeue size failed", 3, queue.size());
 
         queue.dequeue();
         queue.dequeue();
         queue.dequeue();
-        assertEquals(0, queue.size(), "dequeue to blank size failed");
+        assertEquals("dequeue to blank size failed", 0, queue.size());
     }
 
     @Test
@@ -45,7 +44,7 @@ public class QueueAbstractTest {
 
         queue.enqueue("Test 1");
 
-        assertEquals("Test 1", queue.peek(), "peek failed");
+        assertEquals("peek failed", "Test 1", queue.peek());
     }
 
     @Test
@@ -55,11 +54,11 @@ public class QueueAbstractTest {
 
         queue.enqueue("Test 1");
 
-        assertEquals("Test 1", queue.peek(), "enqueue failed at first");
+        assertEquals("enqueue failed at first", "Test 1", queue.peek());
 
         queue.enqueue("Test 2");
 
-        assertEquals("Test 1", queue.peek(), "enqueue failed at 2nd++");
+        assertEquals("enqueue failed at 2nd++", "Test 1", queue.peek());
     }
 
     @Test
@@ -69,11 +68,11 @@ public class QueueAbstractTest {
 
         queue.enqueueAtFront("Test 1");
 
-        assertEquals("Test 1", queue.peek(), "enqueueAtFront failed at first");
+        assertEquals("enqueueAtFront failed at first", "Test 1", queue.peek());
 
         queue.enqueueAtFront("Test 2");
 
-        assertEquals("Test 2", queue.peek(), "enqueueAtFront failed at 2nd++");
+        assertEquals("enqueueAtFront failed at 2nd++", "Test 2", queue.peek());
     }
 
     @Test
@@ -86,12 +85,12 @@ public class QueueAbstractTest {
         queue.enqueue("Test 3");
         queue.enqueue("Test 4");
 
-        assertEquals("Test 1", queue.peek(), "enqueue failed at first");
+        assertEquals("enqueue failed at first", "Test 1", queue.peek());
 
-        assertEquals("Test 1", queue.dequeue(), "dequeue failed at first");
-        assertEquals("Test 2", queue.dequeue(), "dequeue failed at 2nd");
+        assertEquals("dequeue failed at first", "Test 1", queue.dequeue());
+        assertEquals("dequeue failed at 2nd", "Test 2", queue.dequeue());
 
-        assertEquals("Test 3", queue.peek(), "peek failed at 3rd");
+        assertEquals("peek failed at 3rd", "Test 3", queue.peek());
     }
 
     @Test
@@ -99,22 +98,22 @@ public class QueueAbstractTest {
         QueueAbstract<String> queue = new QueueAbstract<String>() {
         };
 
-        assertNull(queue.peek(), "peek failed at blank queue");
+        assertNull("peek failed at blank queue", queue.peek());
 
-        assertNull(queue.dequeue(), "dequeue failed at blank queue");
+        assertNull("dequeue failed at blank queue", queue.dequeue());
 
         queue.enqueue("Test 1");
         queue.enqueue(null);
 
-        assertEquals("Test 1", queue.peek(), "enqueue failed at null input");
+        assertEquals("enqueue failed at null input", "Test 1", queue.peek());
 
         queue.enqueueAtFront(null);
 
-        assertEquals("Test 1", queue.peek(), "enqueueAtFront failed at null input");
+        assertEquals("enqueueAtFront failed at null input", "Test 1", queue.peek());
 
         queue.dequeue();
 
-        assertNull(queue.dequeue(), "dequeue failed at last node");
+        assertNull("dequeue failed at last node", queue.dequeue());
     }
 
     @Test
@@ -132,20 +131,19 @@ public class QueueAbstractTest {
         }
 
         // Test size before iteration
-        assertEquals(4, queue.size(), "Queue size should be 4");
+        assertEquals("Queue size should be 4", 4, queue.size());
 
         // Test iteration
         int i = 0;
         for (String data : queue) {
-            assertEquals(expectedValues[i], data,
-                    "Element at position " + i + " should match expected value");
+            assertEquals("Element at position " + i + " should match expected value", expectedValues[i], data);
             i++;
         }
 
         // Verify we iterated through all elements
-        assertEquals(4, i, "Should have iterated through 4 elements");
+        assertEquals("Should have iterated through 4 elements", 4, i);
 
         // Verify queue is unchanged after iteration (still has all elements)
-        assertEquals(4, queue.size(), "Queue size should remain 4 after iteration");
+        assertEquals("Queue size should remain 4 after iteration", 4, queue.size());
     }
 }
