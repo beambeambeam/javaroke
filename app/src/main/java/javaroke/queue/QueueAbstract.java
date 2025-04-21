@@ -5,29 +5,48 @@ import java.util.NoSuchElementException;
 
 import javaroke.models.Node;
 
+/**
+ * This class is an abstract implementation of a queue data structure in Java.
+ */
 public abstract class QueueAbstract<T> implements Iterable<T> {
   private Node<T> front, rear;
 
   private int size;
 
-  // Set Default Queue
   public QueueAbstract() {
     this.front = null;
     this.rear = null;
     this.size = 0;
   }
 
-  // Check node in Queue is Empty or not
+  /**
+   * The `isEmpty` function in Java returns true if the size is equal to 0.
+   *
+   * @return The method `isEmpty()` returns a boolean value, which indicates whether the size is
+   *         equal to 0.
+   */
   public boolean isEmpty() {
     return size == 0;
   }
 
-  // Get size of Queue
+  /**
+   * The `size()` function in Java returns the size of a data structure.
+   *
+   * @return The `size` variable is being returned.
+   */
   public int size() {
     return size;
   }
 
-  // Enqueue data in the form as class T
+  /**
+   * The `enqueue` function adds a new node with the given data to the end of a queue, increasing
+   * the size of the queue by 1.
+   *
+   * @param data The `data` parameter in the `enqueue` method represents the element that you want
+   *        to add to the queue. It is of type `T`, which means it can be any data type as specified
+   *        when the class or method is defined. In this method, a new node containing this data is
+   *        created
+   */
   public void enqueue(T data) {
     // If input data is null, exist this enqueue process
     if (data == null) {
@@ -53,11 +72,15 @@ public abstract class QueueAbstract<T> implements Iterable<T> {
     size++;
   }
 
-  // Enqueue data at front position in the form as class T
-  // Use for backward function, work parallel with history stack
-
-  // enqueueAtFront Option 2 with O(n).
-  // Be definitely Queue main process, FIFO at all
+  /**
+   * The `enqueueAtFront` method adds an element to the front of a queue by temporarily storing the
+   * existing elements in a separate queue.
+   *
+   * @param data The `enqueueAtFront` method you provided is used to add an element at the front of
+   *        the queue. The `data` parameter represents the element that you want to add to the front
+   *        of the queue. If the `data` parameter is `null`, the method will exit without performing
+   *        any enqueue
+   */
   public void enqueueAtFront(T data) {
     // If input data is null, exist this enqueue process
     if (data == null) {
@@ -111,7 +134,12 @@ public abstract class QueueAbstract<T> implements Iterable<T> {
   // size++;
   // }
 
-  // Dequeue data return as class T
+  /**
+   * The `dequeue` function removes and returns the front element of the queue, updating the front
+   * pointer and size accordingly.
+   *
+   * @return The `dequeue` method returns the data that was removed from the front of the queue.
+   */
   public T dequeue() {
     // If this queue empty, end this dequeue operation and return as a null value
     if (isEmpty()) {
@@ -137,7 +165,12 @@ public abstract class QueueAbstract<T> implements Iterable<T> {
     return data;
   }
 
-  // Check Current front data, return as class T
+  /**
+   * The `peek` function in Java returns the data in the front node of a queue, or null if the queue
+   * is empty.
+   *
+   * @return The `peek` method is returning the data stored in the front node of the queue.
+   */
   public T peek() {
     // If this queue empty, end this peek operation and return as a null value
     if (isEmpty()) {
@@ -148,7 +181,13 @@ public abstract class QueueAbstract<T> implements Iterable<T> {
     return front.getData();
   }
 
-  // Add Iterator interface to this customize queue class
+  /**
+   * The `iterator` method returns an iterator that iterates over a collection of elements stored in
+   * a linked list.
+   *
+   * @return An iterator object that allows iterating over elements of a collection of type T is
+   *         being returned.
+   */
   @Override
   public Iterator<T> iterator() {
     return new Iterator<T>() {

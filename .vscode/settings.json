@@ -1,5 +1,10 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.format.settings.url": ".vscode/eclipse-java-google-style.xml"
+  "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
+  "docwriter.progress.trackMethods": true,
+  "docwriter.progress.trackClasses": true,
+  "docwriter.progress.trackTypes": false,
+  "docwriter.progress.trackFunctions": false,
+  "docwriter.language": "English"
 }
