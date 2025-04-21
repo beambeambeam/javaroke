@@ -6,11 +6,10 @@ public class NodeSong {
   private String songId;
   private String title;
   private String artist;
-  private String duration;
+  private Integer duration;
 
-  public NodeSong(String songId, String title, String artist, String duration) {
+  public NodeSong(String songId, String title, String artist, Integer duration) {
     Validator.validateSongId(songId);
-    Validator.validateTimeForm(duration);
     this.songId = songId;
     this.title = title;
     this.artist = artist;
@@ -29,7 +28,7 @@ public class NodeSong {
     return artist;
   }
 
-  public String getDuration() {
+  public Integer getDuration() {
     return duration;
   }
 
@@ -46,8 +45,7 @@ public class NodeSong {
     this.artist = artist;
   }
 
-  public void setDuration(String duration) {
-    Validator.validateTimeForm(duration);
+  public void setDuration(Integer duration) {
     this.duration = duration;
   }
 }

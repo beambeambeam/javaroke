@@ -6,6 +6,10 @@ public class Validator {
       throw new IllegalArgumentException(
           "Invalid songId format: " + songId + "\nIt shouldn't have spaces.");
     }
+
+    if (songId.isEmpty()) {
+      throw new IllegalArgumentException("Invalid songId format: songId cannot be empty.");
+    }
   }
 
   public static void validateTimeForm(String time) {

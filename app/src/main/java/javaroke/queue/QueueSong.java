@@ -10,12 +10,12 @@ public class QueueSong extends QueueAbstract<NodeSong> {
   }
 
   // Other enqueue function that input as String
-  public void enqueue(String songId, String title, String artist, String duration) {
+  public void enqueue(String songId, String title, String artist, Integer duration) {
     enqueue(new NodeSong(songId, title, artist, duration));
   }
 
   // Other enqueueAtFront function that input as String
-  public void enqueueAtFront(String songId, String title, String artist, String duration) {
+  public void enqueueAtFront(String songId, String title, String artist, Integer duration) {
     enqueueAtFront(new NodeSong(songId, title, artist, duration));
   }
 

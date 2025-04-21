@@ -1,18 +1,15 @@
 package javaroke.models;
 
-import javaroke.utils.Validator;
-
 public class NodeLyric {
-  private String time;
+  private Integer time;
   private String line;
 
-  public NodeLyric(String time, String line) {
-    Validator.validateTimeForm(time);
+  public NodeLyric(Integer time, String line) {
     this.time = time;
     this.line = line;
   }
 
-  public String getTime() {
+  public Integer getTime() {
 
     return time;
   }
@@ -21,8 +18,7 @@ public class NodeLyric {
     return line;
   }
 
-  public void setTime(String time) {
-    Validator.validateTimeForm(time);
+  public void setTime(Integer time) {
     this.time = time;
   }
 
