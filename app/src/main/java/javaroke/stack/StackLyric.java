@@ -3,7 +3,7 @@ package javaroke.stack;
 import javaroke.models.NodeLyric;
 
 public class StackLyric extends StackAbstract<NodeLyric> {
-    // Set up Stact Lyric
+    // Set up Stack Lyric
     public StackLyric() {
         super(); // like use StackAbstract() to set up StackAbstract<NodeLyric> that we are extended
     }

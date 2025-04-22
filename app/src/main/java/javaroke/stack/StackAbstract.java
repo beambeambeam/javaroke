@@ -2,7 +2,7 @@ package javaroke.stack;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import javaroke.models.Node;;
+import javaroke.models.Node;
 
 public abstract class StackAbstract<T> implements Iterable<T> {
     private Node<T> top;
