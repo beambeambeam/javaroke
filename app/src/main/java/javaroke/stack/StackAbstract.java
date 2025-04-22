@@ -23,6 +23,7 @@ public abstract class StackAbstract<T> {
         if (data == null) {
             return;
         }
+
         Node<T> newNode = new Node<T>(data);
         newNode.setNext(top);
         top = newNode;
