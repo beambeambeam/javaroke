@@ -86,28 +86,28 @@ public class StackAbstractTest {
     assertNull("pop failed at last node", stack.pop());
   }
 
-  // @Test
-  // public void testStackAbstractIterable() {
-  // StackAbstract<String> stack = new StackAbstract<String>() {};
+  @Test
+  public void testStackAbstractIterable() {
+    StackAbstract<String> stack = new StackAbstract<String>() {};
 
-  // String[] inputs = {"Test 1", "Test 2", "Test 3", "Test 4"};
-  // for (String value : inputs) {
-  // stack.push(value);
-  // }
+    String[] inputs = {"Test 1", "Test 2", "Test 3", "Test 4"};
+    for (String value : inputs) {
+      stack.push(value);
+    }
 
-  // assertEquals("Stack size should be 4", 4, stack.size());
+    assertEquals("Stack size should be 4", 4, stack.size());
 
-  // // Since it's LIFO, iteration might go in reverse order if not handled specifically
-  // String[] expectedValues = {"Test 4", "Test 3", "Test 2", "Test 1"};
+    // Since it's LIFO, iteration might go in reverse order if not handled specifically
+    String[] expectedValues = {"Test 4", "Test 3", "Test 2", "Test 1"};
 
-  // int i = 0;
-  // for (String data : stack) {
-  // assertEquals("Element at position " + i + " should match expected value", expectedValues[i],
-  // data);
-  // i++;
-  // }
+    int i = 0;
+    for (String data : stack) {
+      assertEquals("Element at position " + i + " should match expected value", expectedValues[i],
+          data);
+      i++;
+    }
 
-  // assertEquals("Should have iterated through 4 elements", 4, i);
-  // assertEquals("Stack size should remain 4 after iteration", 4, stack.size());
-  // }
+    assertEquals("Should have iterated through 4 elements", 4, i);
+    assertEquals("Stack size should remain 4 after iteration", 4, stack.size());
+  }
 }
