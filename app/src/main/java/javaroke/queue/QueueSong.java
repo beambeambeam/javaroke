@@ -6,7 +6,7 @@ import javaroke.models.NodeSong;
 public class QueueSong extends QueueAbstract<NodeSong> {
   // Set up Queue Song
   public QueueSong() {
-    super(); // like use Queue() to set up queue<NodeSOng> that we are extended
+    super(); // like use QueueAbstract() to set up QueueAbstract<NodeSong> that we are extended
   }
 
   // Other enqueue function that input as String
