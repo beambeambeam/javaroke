@@ -7,14 +7,14 @@ import javaroke.stack.StackSong;
 public class Main {
 
   public static void main(String[] args) {
-    StackLyricTest();
+    stackLyricTest();
     System.out.println("");
-    StackSongTest();
+    stackSongTest();
     Controller.main(args);
   }
 
 
-  public static void StackLyricTest() {
+  public static void stackLyricTest() {
     StackLyric stackLyric = new StackLyric();
 
     stackLyric.push(0, "know you're all");
@@ -31,7 +31,7 @@ public class Main {
         "StackLyric test>>  " + stackLyric.peek().getTime() + " " + stackLyric.peek().getline());
   }
 
-  public static void StackSongTest() {
+  public static void stackSongTest() {
     StackSong stackSong = new StackSong();
 
     stackSong.push("U-I-A-Cat-x-yung-kai-blue", "UIA Cat x yung kai blue", "U1", 153);
