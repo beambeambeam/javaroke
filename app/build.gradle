@@ -36,3 +36,12 @@ tasks.named('test', Test) {
         events "passed"
     }
 }
+
+// custom task to run recommendation controller for testing
+task runRec(type: JavaExec) {
+    group = "application"
+    description = "Run RecommendationController for testing"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'javaroke.reccomendation.controllers.RecommendationController'
+}
+
