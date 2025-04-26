@@ -1,6 +1,12 @@
 package javaroke;
-
+import java.io.File;
+import javazoom.jl.player.Player; // for mp3 player
+import java.io.FileInputStream;
+import java.util.List;
+import javax.print.attribute.standard.Media;
 import javaroke.gui.Controller;
+import javaroke.models.NodeLyric;
+import javaroke.queue.QueueLyric;
 import javaroke.stack.StackLyric;
 import javaroke.stack.StackSong;
 
@@ -9,7 +15,8 @@ public class Main {
   public static void main(String[] args) {
     stackLyricTest();
     System.out.println("");
-    stackSongTest();
+    // stackSongTest();
+    SongQueueTest();
     Controller.main(args);
   }
 
@@ -42,5 +49,64 @@ public class Main {
     stackSong.pop();
     stackSong.pop();
     System.out.println("StackSong test>>  " + stackSong.peek().getSongId());
+  }
+
+
+  // Test queue of running lyrics
+  public static void SongQueueTest() {
+    QueueLyric lyricsQueue = new QueueLyric("src/main/songs/jai-sung-mah-eng.json");
+
+    System.out.println("Song Queue Test - Time Simulation");
+
+    // Show All Lyrics List
+    List<String[]> allLyrics = lyricsQueue.getAllLyrics();
+    System.out.println("Total lyrics loaded: " + allLyrics.size());
+    System.out.println("All lyrics:");
+    for (String[] lyric : allLyrics) {
+      System.out.println("[" + lyric[0] + ", \"" + lyric[1] + "\"]");
+    }
+    int currentTimeSeconds = 0;
+    int maxTimeSeconds = 240;
+
+    // Play MP3 file asynchronously
+    new Thread(() -> {
+      try {
+        FileInputStream fis = new FileInputStream("src/main/songs/mp3/jai-sung-mah.mp3");
+        Player player = new Player(fis);
+        System.out.println("Now playing: jai-sung-mah.mp3");
+        player.play(); 
+      } catch (Exception e) {
+        System.out.println("Error playing MP3 file: " + e.getMessage());
+        e.printStackTrace();
+      }
+    }).start();
+
+    while (currentTimeSeconds <= maxTimeSeconds && !lyricsQueue.isEmpty()) {
+      String formattedTime =
+          String.format("%02d:%02d", currentTimeSeconds / 60, currentTimeSeconds % 60);
+
+      // Check if we've reached the next lyric's timestamp
+      if (!lyricsQueue.isEmpty() && lyricsQueue.peek().getTime() <= currentTimeSeconds) {
+        NodeLyric currentLyric = lyricsQueue.dequeue();
+        System.out.println(
+            formattedTime + " (" + currentLyric.getTime() + "s) -> " + currentLyric.getline());
+      }
+
+      // Increment 1 Second
+      currentTimeSeconds++;
+
+      try {
+        Thread.sleep(1000); // 1 seconds time count
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
+    if (lyricsQueue.isEmpty()) {
+      System.out.println("All lyrics have been displayed.");
+    } else {
+      System.out.println("Simulation ended with remaining lyrics.");
+    }
+
   }
 }
