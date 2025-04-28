@@ -3,7 +3,6 @@ package javaroke.queue;
 import javaroke.models.NodeLyric;
 import javaroke.stack.StackLyric;
 
-import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -81,7 +80,7 @@ public class QueueLyric extends QueueAbstract<NodeLyric> {
       int minutes = timeInSeconds / 60;
       int seconds = timeInSeconds % 60;
       String formattedTime = String.format("%02d:%02d", minutes, seconds);
-      lyricsAndTimes.add(new String[]{formattedTime, current.getline()});
+      lyricsAndTimes.add(new String[] {formattedTime, current.getline()});
       tempNodes.add(current);
     }
 
