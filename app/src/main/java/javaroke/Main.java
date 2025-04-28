@@ -1,9 +1,8 @@
 package javaroke;
-import java.io.File;
-import javazoom.jl.player.Player; // for mp3 player
+
+import javazoom.jl.player.Player;
 import java.io.FileInputStream;
 import java.util.List;
-import javax.print.attribute.standard.Media;
 import javaroke.gui.Controller;
 import javaroke.models.NodeLyric;
 import javaroke.queue.QueueLyric;
@@ -74,7 +73,7 @@ public class Main {
         FileInputStream fis = new FileInputStream("src/main/songs/mp3/jai-sung-mah.mp3");
         Player player = new Player(fis);
         System.out.println("Now playing: jai-sung-mah.mp3");
-        player.play(); 
+        player.play();
       } catch (Exception e) {
         System.out.println("Error playing MP3 file: " + e.getMessage());
         e.printStackTrace();
