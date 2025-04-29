@@ -45,3 +45,9 @@ task runRec(type: JavaExec) {
     mainClass = 'javaroke.reccomendation.controllers.RecommendationController'
 }
 
+task testRec(type: JavaExec) {
+    group = "application"
+    description = "Run RecommendationTest for testing"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'javaroke.reccomendation.tests.RecommendationTest'
+}
