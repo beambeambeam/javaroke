@@ -1,4 +1,4 @@
-package javaroke.reccomendation.core.utils.weight;
+package javaroke.reccomendation.core.utils.tranformers;
 
 import javaroke.reccomendation.core.graphs.GraphHashMap;
 

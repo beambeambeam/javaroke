@@ -1,8 +1,9 @@
 package javaroke.reccomendation.tests;
 
+import javaroke.reccomendation.core.algorithms.GraphAlgorithmForHashMap;
 import javaroke.reccomendation.core.graphs.GraphHashMap;
 import javaroke.reccomendation.core.utils.AdjacencyMatrixUtils;
-import javaroke.reccomendation.core.utils.weight.WeightTranformerForHashmap;
+import javaroke.reccomendation.core.utils.tranformers.WeightTranformerForHashmap;
 
 public class Graph {
     public static void test() {
@@ -22,9 +23,11 @@ public class Graph {
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         WeightTranformerForHashmap.applyExponentialTransformToWeights(graph, 2);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.normalizeWeightsToRange01(graph);
-        AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
+        // WeightTranformerForHashmap.normalizeWeightsToRange01(graph);
+        // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        // WeightTranformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
+        // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        GraphAlgorithmForHashMap.floydWarshall(graph);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
     }
 
