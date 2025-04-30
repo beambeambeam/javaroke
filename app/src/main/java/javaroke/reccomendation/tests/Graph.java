@@ -14,17 +14,17 @@ public class Graph {
         graph.addEdge("C", "D", 1.0);
 
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.flipWeight(graph);
+        WeightTranformerForHashmap.invertWeights(graph);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.addBias2Floor(graph, 10);
+        WeightTranformerForHashmap.applyBiasToFloor(graph, 10);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.additive2Weight(graph, 3);
+        WeightTranformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.exponential2Weight(graph, 2);
+        WeightTranformerForHashmap.applyExponentialTransformToWeights(graph, 2);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.normalize0to1(graph);
+        WeightTranformerForHashmap.normalizeWeightsToRange01(graph);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.normalizeScaleWeight(graph, 0.5);
+        WeightTranformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
     }
 

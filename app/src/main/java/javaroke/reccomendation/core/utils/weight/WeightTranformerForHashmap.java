@@ -9,7 +9,7 @@ public class WeightTranformerForHashmap {
     // Flip to the less weight it has mean the more pupular it is
 
     // floorWeight = maximumWeight + 1 (The less popular it is)
-    public static void flipWeight(GraphHashMap graph) {
+    public static void invertWeights(GraphHashMap graph) {
         for (String src : graph.allKeyList) {
             for (String dest : graph.allKeyList) {
                 if (!graph.adjacencyList.containsKey(src)
@@ -28,11 +28,11 @@ public class WeightTranformerForHashmap {
 
     // floorWeight = maximumWeight + bias + 1 (The less popular it is)
     // But have bias ranges between floor and lowest value
-    public static void addBias2Floor(GraphHashMap graph, double bias) {
+    public static void applyBiasToFloor(GraphHashMap graph, double bias) {
         graph.floorWeight += bias;
     }
 
-    public static void additive2Weight(GraphHashMap graph, double value) {
+    public static void applyAdditiveTransformToWeights(GraphHashMap graph, double value) {
         for (String src : graph.allKeyList) {
             for (String dest : graph.allKeyList) {
                 if (!graph.adjacencyList.containsKey(src)
@@ -48,7 +48,23 @@ public class WeightTranformerForHashmap {
         }
     }
 
-    public static void exponential2Weight(GraphHashMap graph, double power) {
+    public static void applyMultiplicativeTransformToWeights(GraphHashMap graph, double value) {
+        for (String src : graph.allKeyList) {
+            for (String dest : graph.allKeyList) {
+                if (!graph.adjacencyList.containsKey(src)
+                        || !graph.adjacencyList.get(src).containsKey(dest)) {
+                    continue;
+                }
+
+                // M[src][dest] * value
+                double newWeight = graph.adjacencyList.get(src).get(dest) * value;
+
+                graph.adjacencyList.get(src).put(dest, newWeight);
+            }
+        }
+    }
+
+    public static void applyExponentialTransformToWeights(GraphHashMap graph, double power) {
         for (String src : graph.allKeyList) {
             for (String dest : graph.allKeyList) {
                 if (!graph.adjacencyList.containsKey(src)
@@ -65,7 +81,7 @@ public class WeightTranformerForHashmap {
         graph.floorWeight = Math.pow(graph.floorWeight, power);
     }
 
-    public static void normalize0to1(GraphHashMap graph) {
+    public static void normalizeWeightsToRange01(GraphHashMap graph) {
         for (String src : graph.allKeyList) {
             for (String dest : graph.allKeyList) {
                 if (!graph.adjacencyList.containsKey(src)
@@ -75,23 +91,6 @@ public class WeightTranformerForHashmap {
 
                 // M[src][dest] / floorWeight
                 double newWeight = graph.adjacencyList.get(src).get(dest) / graph.floorWeight;
-
-                graph.adjacencyList.get(src).put(dest, newWeight);
-            }
-        }
-        graph.floorWeight = 1.0;
-    }
-
-    public static void normalizeScaleWeight(GraphHashMap graph, double scale) {
-        for (String src : graph.allKeyList) {
-            for (String dest : graph.allKeyList) {
-                if (!graph.adjacencyList.containsKey(src)
-                        || !graph.adjacencyList.get(src).containsKey(dest)) {
-                    continue;
-                }
-
-                // M[src][dest] / scale
-                double newWeight = graph.adjacencyList.get(src).get(dest) * scale;
 
                 graph.adjacencyList.get(src).put(dest, newWeight);
             }
