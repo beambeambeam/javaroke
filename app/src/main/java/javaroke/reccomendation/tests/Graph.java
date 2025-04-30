@@ -1,18 +1,22 @@
 package javaroke.reccomendation.tests;
 
-import javaroke.reccomendation.models.graphs.TrippleHashMap;
+import javaroke.reccomendation.core.graphs.GraphHashMap;
+import javaroke.reccomendation.core.utils.AdjacencyMatrixUtils;
+import javaroke.reccomendation.core.utils.weight.WeightTranformerForHashmap;
 
 public class Graph {
     public static void test() {
-        TrippleHashMap graph = new TrippleHashMap();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addEdge("A", "B", 1.0);
-        System.out.println(graph.getWeight("A", "B")); // Should print 1.0
-        System.out.println(graph.getNeighbors("A")); // Should print {B=1.0}
-        graph.setWeight("A", "B", 2.0);
-        System.out.println(graph.getWeight("A", "B")); // Should print 2.0
-        graph.removeEdge("A", "B", 1.0);
-        System.out.println(graph.getWeight("A", "B")); // Should print null
+        GraphHashMap graph = new GraphHashMap();
+        graph.addEdge("A", "B", 5.0);
+        graph.addEdge("B", "C", 3.0);
+        graph.addEdge("A", "C", 3.0);
+        graph.addEdge("C", "B", 2.0);
+        graph.addEdge("C", "D", 1.0);
+
+        AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        WeightTranformerForHashmap.flipWeight(graph, 0);
+        AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        WeightTranformerForHashmap.additiveTransform(graph, 2);
+        AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
     }
 }
