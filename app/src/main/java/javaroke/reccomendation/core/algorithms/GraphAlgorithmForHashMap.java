@@ -1,7 +1,6 @@
 package javaroke.reccomendation.core.algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,22 +38,47 @@ public class GraphAlgorithmForHashMap {
         }
     }
 
+    private static void constructPathRecursive(GraphHashMap graph, String start, String end,
+            List<String> path) {
+        String mid = graph.previousVertex.get(start).get(end);
+
+        if (mid == null) {
+            if (graph.adjacencyList.get(start).containsKey(end)) {
+                path.add(start);
+                if (!start.equals(end))
+                    path.add(end);
+            }
+        } else {
+            constructPathRecursive(graph, start, mid, path);
+            path.remove(path.size() - 1); // remove duplicate mid
+            constructPathRecursive(graph, mid, end, path);
+        }
+    }
+
+    // Example usage of constructPathRecursive to ensure it is used
     public static List<String> reconstructPathFromGraphHashMap(GraphHashMap graph, String start,
             String end) {
-        HashMap<String, String> previous = graph.previousVertex.get(start);
-        if (previous == null)
-            return new ArrayList<>();
-
         List<String> path = new ArrayList<>();
-        for (String at = end; at != null; at = previous.get(at)) {
-            path.add(at);
-        }
-        path.add(start);
-        Collections.reverse(path);
-
-        // return path.get(0).equals(start) ? path : new ArrayList<>();
+        constructPathRecursive(graph, start, end, path);
         return path;
     }
+
+    // public static List<String> reconstructPathFromGraphHashMap(GraphHashMap graph, String start,
+    // String end) {
+    // HashMap<String, String> previous = graph.previousVertex.get(start);
+    // if (previous == null)
+    // return new ArrayList<>();
+
+    // List<String> path = new ArrayList<>();
+    // for (String at = end; at != null; at = previous.get(at)) {
+    // path.add(at);
+    // }
+    // path.add(start);
+    // Collections.reverse(path);
+
+    // // return path.get(0).equals(start) ? path : new ArrayList<>();
+    // return path;
+    // }
 
 
     public static Map<String, Double> dijkstra(GraphHashMap graph, String startNode) {

@@ -8,23 +8,25 @@ import javaroke.reccomendation.core.utils.tranformers.WeightTranformerForHashmap
 public class Graph {
     public static void test() {
         GraphHashMap graph = new GraphHashMap();
-        graph.addEdge("A", "B", 5.0);
-        graph.addEdge("B", "C", 3.0);
-        graph.addEdge("A", "C", 3.0);
-        graph.addEdge("C", "B", 2.0);
-        graph.addEdge("C", "D", 1.0);
-        graph.addEdge("D", "A", 3.0);
-        graph.addEdge("B", "A", 4.0);
+        graph.addEdge("A", "B", 2.0);
+        graph.addEdge("B", "C", 2.0);
+        graph.addEdge("C", "D", 2.0);
+        graph.addEdge("D", "E", 2.0);
+        graph.addEdge("E", "A", 2.0);
+        graph.addEdge("A", "X", 3.0);
+        graph.addEdge("X", "C", 3.0);
+
+
 
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         WeightTranformerForHashmap.invertWeights(graph);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.applyBiasToFloor(graph, 5);
+        WeightTranformerForHashmap.applyBiasToFloor(graph, 10);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
-        AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        // WeightTranformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
+        // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         WeightTranformerForHashmap.applyExponentialTransformToWeights(graph, 2);
-        AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         // WeightTranformerForHashmap.normalizeWeightsToRange01(graph);
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         // WeightTranformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
@@ -33,7 +35,8 @@ public class Graph {
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         AdjacencyMatrixUtils.printPreviosVertexMatrix(graph.getPreviousVertexMetrix());
         AdjacencyMatrixUtils.printPath(
-                GraphAlgorithmForHashMap.reconstructPathFromGraphHashMap(graph, "C", "A"));
+                GraphAlgorithmForHashMap.reconstructPathFromGraphHashMap(graph, "E", "C"));
+
     }
 
 }

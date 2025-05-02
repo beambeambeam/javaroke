@@ -77,6 +77,7 @@ public class GraphHashMap implements GraphInterface {
         }
 
         adjacencyList.get(src).put(dest, newWeight);
+        adjacencyList.get(dest).put(src, newWeight);
     }
 
     @Override
