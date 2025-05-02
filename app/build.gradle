@@ -5,7 +5,7 @@ plugins {
 
 javafx {
     version = "24.0.1"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.media' ]
 }
 
 repositories {
@@ -14,7 +14,8 @@ repositories {
 
 dependencies {
     testImplementation libs.junit
-
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'javazoom:jlayer:1.0.1'
     implementation libs.guava
 }
 
