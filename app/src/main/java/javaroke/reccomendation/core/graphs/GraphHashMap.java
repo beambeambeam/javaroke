@@ -56,6 +56,7 @@ public class GraphHashMap implements GraphInterface {
             keyList.add(vertex);
             previousVertex.put(vertex, new HashMap<>());
             adjacencyList.put(vertex, new HashMap<>());
+            adjacencyList.get(vertex).put(vertex, 0.0);
             size++;
         }
     }
@@ -114,10 +115,7 @@ public class GraphHashMap implements GraphInterface {
         int i = 0, j = 0;
         for (String src : keyList) {
             for (String dest : keyList) {
-                if (i == j)
-                    adjacencyMatrix[i][j] = 0.0;
-                else
-                    adjacencyMatrix[i][j] = adjacencyList.get(src).getOrDefault(dest, floorWeight);
+                adjacencyMatrix[i][j] = adjacencyList.get(src).getOrDefault(dest, floorWeight);
                 j++;
             }
 
@@ -126,6 +124,23 @@ public class GraphHashMap implements GraphInterface {
         }
 
         return adjacencyMatrix;
+    }
+
+    public String[][] getPreviousVertexMetrix() {
+        String[][] previousVertexMetrix = new String[size][size];
+
+        int i = 0, j = 0;
+        for (String src : keyList) {
+            for (String dest : keyList) {
+                previousVertexMetrix[i][j] = previousVertex.get(src).getOrDefault(dest, "null");
+                j++;
+            }
+
+            i++;
+            j = 0;
+        }
+
+        return previousVertexMetrix;
     }
 
     public GraphHashMap cloneGraph() {

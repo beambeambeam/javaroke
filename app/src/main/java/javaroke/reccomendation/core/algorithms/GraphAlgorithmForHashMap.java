@@ -49,9 +49,11 @@ public class GraphAlgorithmForHashMap {
         for (String at = end; at != null; at = previous.get(at)) {
             path.add(at);
         }
+        path.add(start);
         Collections.reverse(path);
 
-        return path.get(0).equals(start) ? path : new ArrayList<>();
+        // return path.get(0).equals(start) ? path : new ArrayList<>();
+        return path;
     }
 
 

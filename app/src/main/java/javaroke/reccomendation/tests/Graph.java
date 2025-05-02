@@ -13,11 +13,13 @@ public class Graph {
         graph.addEdge("A", "C", 3.0);
         graph.addEdge("C", "B", 2.0);
         graph.addEdge("C", "D", 1.0);
+        graph.addEdge("D", "A", 3.0);
+        graph.addEdge("B", "A", 4.0);
 
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         WeightTranformerForHashmap.invertWeights(graph);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTranformerForHashmap.applyBiasToFloor(graph, 10);
+        WeightTranformerForHashmap.applyBiasToFloor(graph, 5);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         WeightTranformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
@@ -29,6 +31,9 @@ public class Graph {
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         GraphAlgorithmForHashMap.floydWarshall(graph);
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixUtils.printPreviosVertexMatrix(graph.getPreviousVertexMetrix());
+        AdjacencyMatrixUtils.printPath(
+                GraphAlgorithmForHashMap.reconstructPathFromGraphHashMap(graph, "C", "A"));
     }
 
 }

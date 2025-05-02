@@ -12,6 +12,10 @@ public class WeightTranformerForHashmap {
     public static void invertWeights(GraphHashMap graph) {
         for (String src : graph.keyList) {
             for (String dest : graph.keyList) {
+                if (src.equals(dest)) {
+                    continue;
+                }
+
                 if (!graph.adjacencyList.containsKey(src)
                         || !graph.adjacencyList.get(src).containsKey(dest)) {
                     continue;
@@ -35,6 +39,10 @@ public class WeightTranformerForHashmap {
     public static void applyAdditiveTransformToWeights(GraphHashMap graph, double value) {
         for (String src : graph.keyList) {
             for (String dest : graph.keyList) {
+                if (src.equals(dest)) {
+                    continue;
+                }
+
                 if (!graph.adjacencyList.containsKey(src)
                         || !graph.adjacencyList.get(src).containsKey(dest)) {
                     continue;
@@ -51,6 +59,10 @@ public class WeightTranformerForHashmap {
     public static void applyMultiplicativeTransformToWeights(GraphHashMap graph, double value) {
         for (String src : graph.keyList) {
             for (String dest : graph.keyList) {
+                if (src.equals(dest)) {
+                    continue;
+                }
+
                 if (!graph.adjacencyList.containsKey(src)
                         || !graph.adjacencyList.get(src).containsKey(dest)) {
                     continue;
@@ -67,6 +79,10 @@ public class WeightTranformerForHashmap {
     public static void applyExponentialTransformToWeights(GraphHashMap graph, double power) {
         for (String src : graph.keyList) {
             for (String dest : graph.keyList) {
+                if (src.equals(dest)) {
+                    continue;
+                }
+
                 if (!graph.adjacencyList.containsKey(src)
                         || !graph.adjacencyList.get(src).containsKey(dest)) {
                     continue;
@@ -84,6 +100,10 @@ public class WeightTranformerForHashmap {
     public static void normalizeWeightsToRange01(GraphHashMap graph) {
         for (String src : graph.keyList) {
             for (String dest : graph.keyList) {
+                if (src.equals(dest)) {
+                    continue;
+                }
+
                 if (!graph.adjacencyList.containsKey(src)
                         || !graph.adjacencyList.get(src).containsKey(dest)) {
                     continue;
