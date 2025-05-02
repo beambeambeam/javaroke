@@ -1,8 +1,10 @@
 package javaroke.reccomendation.tests;
 
+import java.nio.file.Paths;
 import javaroke.reccomendation.core.algorithms.GraphAlgorithmForHashMap;
 import javaroke.reccomendation.core.graphs.GraphHashMap;
 import javaroke.reccomendation.core.utils.AdjacencyMatrixUtils;
+import javaroke.reccomendation.core.utils.saves.GraphHashMapIO;
 import javaroke.reccomendation.core.utils.tranformers.WeightTranformerForHashmap;
 
 public class Graph {
@@ -16,7 +18,14 @@ public class Graph {
         graph.addEdge("A", "X", 3.0);
         graph.addEdge("X", "C", 3.0);
 
+        try {
+            // String path = Paths.get("..", "data", "saves", "graph.json").toString();
+            String path = "src/main/java/javaroke/reccomendation/core/data/saves/graph.json";
 
+            GraphHashMapIO.saveGraphHashMap(graph, path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         WeightTranformerForHashmap.invertWeights(graph);

@@ -17,6 +17,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'javazoom:jlayer:1.0.1'
     implementation libs.guava
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 }
 
 application {
