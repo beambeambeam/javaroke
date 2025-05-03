@@ -1,4 +1,4 @@
-package javaroke.gui;
+package javaroke.gui.search;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javaroke.gui.DataSingleton;
+import javaroke.gui.SceneController;
 import javaroke.songq.SongQueue;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.*;
 
-public class SearchController extends SceneController implements Initializable {
+public class Controller extends SceneController implements Initializable {
   DataSingleton data = DataSingleton.getInstance();
   SongQueue externalQueueList = data.getSongQueue();
 
