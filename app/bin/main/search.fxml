@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0"
+<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0"
   xmlns="http://javafx.com/javafx/23.0.1"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.PlayController">
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.SearchController">
   <children>
-    <Label text="สวัสดีครับ 2" />
-    <Button mnemonicParsing="false" onAction="#switchToScene1" text="Button 1" />
-    <Button mnemonicParsing="false" onAction="#switchToScene3" text="Button 3" />
+    <HBox alignment="CENTER" prefHeight="500.0" prefWidth="200.0">
+      <children>
+        <ListView fx:id="songList" prefHeight="200.0" />
+        <ListView fx:id="queueList" prefHeight="200.0" />
+      </children>
+      <VBox.margin>
+        <Insets left="200.0" right="200.0" />
+      </VBox.margin>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+    </HBox>
   </children>
 </VBox>
