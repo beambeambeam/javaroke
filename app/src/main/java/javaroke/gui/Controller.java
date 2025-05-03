@@ -1,9 +1,12 @@
 package javaroke.gui;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -11,30 +14,30 @@ import javafx.stage.Stage;
  * being used.
  */
 public class Controller extends Application {
-  /**
-   * The start method initializes a JavaFX application window displaying the Java and JavaFX
-   * versions being used.
-   *
-   * @param stage The `stage` parameter in the `start` method represents the primary stage for the
-   *        JavaFX application. It is the top-level container for the JavaFX application window
-   *        where you can set scenes, show or hide the window, and perform other window-related
-   *        operations.
-   */
+
   @Override
   public void start(Stage stage) {
-    String javaVersion = System.getProperty("java.version");
-    String javafxVersion = System.getProperty("javafx.version");
-    Label l =
-        new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-    Scene scene = new Scene(new StackPane(l), 640, 480);
+    Scene scene = new Scene(createContents(), 640, 480);
     stage.setScene(scene);
     stage.show();
   }
 
-  /**
-   * The main function in Java that launches the program with command-line arguments.
-   */
   public static void main(String[] args) {
     launch(args);
+  }
+
+  private Region createContents() {
+    VBox results = new VBox(20, createMain());
+    results.setAlignment(Pos.CENTER);
+    results.getStylesheets()
+        .add(this.getClass().getResource("/javaroke/gui/controller.css").toExternalForm());
+    return results;
+  }
+
+  private HBox createMain() {
+    Label mainText = new Label("JAVAROKE!");
+    HBox hBox = new HBox(6, mainText);
+    hBox.setAlignment(Pos.CENTER);
+    return hBox;
   }
 }
