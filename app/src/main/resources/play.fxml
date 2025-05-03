@@ -9,7 +9,6 @@
   xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.PlayController">
   <children>
     <Label text="สวัสดีครับ 3" />
-    <Button mnemonicParsing="false" onAction="#switchToScene1" text="Button 1" />
     <Button mnemonicParsing="false" onAction="#switchToScene2" text="Button 2" />
   </children>
 </VBox>
