@@ -18,7 +18,7 @@ public class GUI extends Application {
   @Override
   public void start(Stage stage) throws IOException {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/main.fxml"));
+    loader.setLocation(getClass().getResource("/home.fxml"));
     Parent content = loader.load();
 
     Scene scene = new Scene(content);
