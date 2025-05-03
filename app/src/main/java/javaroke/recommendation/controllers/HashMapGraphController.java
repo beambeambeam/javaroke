@@ -1,7 +1,7 @@
 package javaroke.recommendation.controllers;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
+
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,14 +44,18 @@ public class HashMapGraphController {
             throw new IllegalArgumentException("Filename cannot be null or empty");
         }
 
-        Path path = Paths.get(loadFileName);
-        if (!Files.exists(path)) {
-            throw new IllegalArgumentException("File does not exist: " + loadFileName);
+        String saveFolder = ControllerConfigLoader.get("SAVE_FOLDER");
+        String loadPath = Paths.get(saveFolder, loadFileName).toString();
+
+        if (!Files.exists(Paths.get(loadPath))) {
+            throw new IllegalArgumentException("File does not exist: " + loadPath);
         }
 
         try {
-            LOGGER.log(Level.INFO, "Loading graph: {0}", loadFileName);
-            return HashMapGraphIO.loadGraph(loadFileName);
+            HashMapGraph graph = HashMapGraphIO.loadGraph(loadPath);
+
+            LOGGER.log(Level.INFO, "Loading graph: {0}", loadPath);
+            return graph;
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Loading graph failed: {0}", e.toString());
             return new HashMapGraph();
@@ -74,6 +78,14 @@ public class HashMapGraphController {
             default:
                 throw new IllegalArgumentException("Unsupported version: " + version);
         }
+    }
+
+    public HashMapGraph getGraph() {
+        return graph;
+    }
+
+    public HashMapGraphVersion getVersion() {
+        return version;
     }
 
 }

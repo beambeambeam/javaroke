@@ -26,11 +26,11 @@ public class Graph {
             e.printStackTrace();
         }
 
-        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
         WeightTransformerForHashmapGraph.invertWeights(graph);
-        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
         WeightTransformerForHashmapGraph.applyBiasToFloor(graph, 10);
-        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
         // WeightTranformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         WeightTransformerForHashmapGraph.applyExponentialTransformToWeights(graph, 2);
@@ -40,8 +40,8 @@ public class Graph {
         // WeightTranformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         FloydWallshallForHashMapGraph.floydWarshall(graph);
-        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
-        AdjacencyMatrixPrinter.printPreviosVertexMetrix(graph.getPreviousVertexMetrix());
+        AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
+        AdjacencyMatrixPrinter.printPreviosVertexMatrix(graph.getPreviousVertexMatrix());
         AdjacencyMatrixPrinter.printPath(
                 FloydWallshallForHashMapGraph.reconstructPathFromGraphHashMap(graph, "A", "D"));
         AdjacencyMatrixPrinter.printPath(
@@ -55,8 +55,8 @@ public class Graph {
         WeightTransformerForHashmapGraph.normalizeWeightsToRange01(graph);
         WeightTransformerForHashmapGraph.applyMultiplicativeTransformToWeights(graph, 0.5);
         FloydWallshallForHashMapGraph.floydWarshall(graph);
-        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
-        AdjacencyMatrixPrinter.printPreviosVertexMetrix(graph.getPreviousVertexMetrix());
+        AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
+        AdjacencyMatrixPrinter.printPreviosVertexMatrix(graph.getPreviousVertexMatrix());
 
     }
 

@@ -112,7 +112,7 @@ public class HashMapGraph implements Graph {
     }
 
     @JsonIgnore
-    public double[][] getAdjacencyMetrix() {
+    public double[][] getAdjacencyMatrix() {
         double[][] adjacencyMatrix = new double[size][size];
 
         int i = 0, j = 0;
@@ -130,7 +130,7 @@ public class HashMapGraph implements Graph {
     }
 
     @JsonIgnore
-    public String[][] getPreviousVertexMetrix() {
+    public String[][] getPreviousVertexMatrix() {
         String[][] previousVertexMetrix = new String[size][size];
 
         int i = 0, j = 0;
