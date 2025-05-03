@@ -1,14 +1,14 @@
 package javaroke.recommendation.tests;
 
-import javaroke.recommendation.core.algorithms.pathFinding.floydWallshall.FloydWallshallForGraphHashMap;
-import javaroke.recommendation.core.models.graphs.GraphHashMap;
-import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixRead;
-import javaroke.recommendation.core.utils.saves.GraphHashMapIO;
-import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmap;
+import javaroke.recommendation.core.algorithms.pathFinding.FloydWallshallForHashMapGraph;
+import javaroke.recommendation.core.models.graphs.HashMapGraph;
+import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixPrinter;
+import javaroke.recommendation.core.utils.saves.HashMapGraphIO;
+import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmapGraph;
 
 public class Graph {
     public static void test() {
-        GraphHashMap graph = new GraphHashMap();
+        HashMapGraph graph = new HashMapGraph();
         graph.addEdge("A", "B", 2.0);
         graph.addEdge("B", "C", 2.0);
         graph.addEdge("C", "D", 2.0);
@@ -21,42 +21,42 @@ public class Graph {
             // String path = Paths.get("..", "data", "saves", "graph.json").toString();
             String path = "src/main/java/javaroke/reccomendation/core/data/saves/graph.json";
 
-            GraphHashMapIO.saveGraphHashMap(graph, path);
+            HashMapGraphIO.saveGraphHashMap(graph, path);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        AdjacencyMatrixRead.printAdjacencyMetrix(graph.getAdjacencyMetrix());
-        WeightTransformerForHashmap.invertWeights(graph);
-        AdjacencyMatrixRead.printAdjacencyMetrix(graph.getAdjacencyMetrix());
-        WeightTransformerForHashmap.applyBiasToFloor(graph, 10);
-        AdjacencyMatrixRead.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        WeightTransformerForHashmapGraph.invertWeights(graph);
+        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        WeightTransformerForHashmapGraph.applyBiasToFloor(graph, 10);
+        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
         // WeightTranformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        WeightTransformerForHashmap.applyExponentialTransformToWeights(graph, 2);
+        WeightTransformerForHashmapGraph.applyExponentialTransformToWeights(graph, 2);
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         // WeightTranformerForHashmap.normalizeWeightsToRange01(graph);
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         // WeightTranformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
-        FloydWallshallForGraphHashMap.floydWarshall(graph);
-        AdjacencyMatrixRead.printAdjacencyMetrix(graph.getAdjacencyMetrix());
-        AdjacencyMatrixRead.printPreviosVertexMetrix(graph.getPreviousVertexMetrix());
-        AdjacencyMatrixRead.printPath(
-                FloydWallshallForGraphHashMap.reconstructPathFromGraphHashMap(graph, "A", "D"));
-        AdjacencyMatrixRead.printPath(
-                FloydWallshallForGraphHashMap.reconstructPathFromGraphHashMap(graph, "E", "C"));
+        FloydWallshallForHashMapGraph.floydWarshall(graph);
+        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixPrinter.printPreviosVertexMetrix(graph.getPreviousVertexMetrix());
+        AdjacencyMatrixPrinter.printPath(
+                FloydWallshallForHashMapGraph.reconstructPathFromGraphHashMap(graph, "A", "D"));
+        AdjacencyMatrixPrinter.printPath(
+                FloydWallshallForHashMapGraph.reconstructPathFromGraphHashMap(graph, "E", "C"));
 
         ;
-        WeightTransformerForHashmap.invertWeights(graph);
-        WeightTransformerForHashmap.applyBiasToFloor(graph, 10);
-        WeightTransformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
-        WeightTransformerForHashmap.applyExponentialTransformToWeights(graph, 2);
-        WeightTransformerForHashmap.normalizeWeightsToRange01(graph);
-        WeightTransformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
-        FloydWallshallForGraphHashMap.floydWarshall(graph);
-        AdjacencyMatrixRead.printAdjacencyMetrix(graph.getAdjacencyMetrix());
-        AdjacencyMatrixRead.printPreviosVertexMetrix(graph.getPreviousVertexMetrix());
+        WeightTransformerForHashmapGraph.invertWeights(graph);
+        WeightTransformerForHashmapGraph.applyBiasToFloor(graph, 10);
+        WeightTransformerForHashmapGraph.applyAdditiveTransformToWeights(graph, 3);
+        WeightTransformerForHashmapGraph.applyExponentialTransformToWeights(graph, 2);
+        WeightTransformerForHashmapGraph.normalizeWeightsToRange01(graph);
+        WeightTransformerForHashmapGraph.applyMultiplicativeTransformToWeights(graph, 0.5);
+        FloydWallshallForHashMapGraph.floydWarshall(graph);
+        AdjacencyMatrixPrinter.printAdjacencyMetrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixPrinter.printPreviosVertexMetrix(graph.getPreviousVertexMetrix());
 
     }
 

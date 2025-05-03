@@ -1,5 +1,5 @@
 package javaroke.recommendation.controllers;
 
-public class MainController {
+public class HashMapGraphController {
 
 }
