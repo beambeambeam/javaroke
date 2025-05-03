@@ -10,6 +10,9 @@ public class RecommendationController {
 
         AdjacencyMatrixUtils
                 .printAdjacencyMatrix(graphHashMapTypeController.graph.getAdjacencyMetrix());
+        graphHashMapTypeController.processGraph();
+        AdjacencyMatrixUtils
+                .printAdjacencyMatrix(graphHashMapTypeController.graph.getAdjacencyMetrix());
 
     }
 }
