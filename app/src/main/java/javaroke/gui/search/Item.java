@@ -59,7 +59,8 @@ public class Item {
               jsonObject.has("title") ? jsonObject.get("title").getAsString() : "Unknown Title";
           String artist =
               jsonObject.has("artist") ? jsonObject.get("artist").getAsString() : "Unknown Artist";
-          items.add(new Item(artist, title, artist));
+          String id = jsonObject.has("id") ? jsonObject.get("id").getAsString() : "Unknown id";
+          items.add(new Item(id, title, artist));
         } catch (Exception ex) {
           System.err.println("Error reading file: " + file.getFileName() + " - " + ex.getMessage());
         }
