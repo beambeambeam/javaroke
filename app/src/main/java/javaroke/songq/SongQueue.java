@@ -10,69 +10,88 @@ public class SongQueue {
 
   private QueueSong queue;
   private StackSong history;
-  private NodeSong currentSong;
 
   public SongQueue() {
     this.queue = new QueueSong();
     this.history = new StackSong();
-    this.currentSong = null;
   }
 
-  public void addSong(String songId, String title, String artist, int duration) {
+  public void enqueueSong(String songId, String title, String artist, int duration) {
     NodeSong newSong = new NodeSong(songId, title, artist, duration);
     queue.enqueue(newSong);
-    if (currentSong == null) {
-      currentSong = queue.peek();
-    }
   }
 
-  public NodeSong removeSong() {
+  public void dequeueSong() {
+    if (queue.isEmpty()) {
+      return;
+    }
+
     NodeSong song = queue.dequeue();
     if (song != null) {
       history.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
-      currentSong = queue.peek();
     }
-    return song;
+  }
+
+  public List<NodeSong> getAllSongs() {
+    List<NodeSong> allSongs = new ArrayList<>();
+
+    QueueSong tempQueue = new QueueSong();
+    while (!queue.isEmpty()) {
+      NodeSong song = queue.dequeue();
+      allSongs.add(song);
+      tempQueue.enqueue(song);
+    }
+
+    while (!tempQueue.isEmpty()) {
+      queue.enqueue(tempQueue.dequeue());
+    }
+
+    StackSong tempStack = new StackSong();
+    while (!history.isEmpty()) {
+      NodeSong song = history.pop();
+      allSongs.add(song);
+      tempStack.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
+    }
+
+    while (!tempStack.isEmpty()) {
+      NodeSong song = tempStack.pop();
+      history.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
+    }
+
+    return allSongs;
   }
 
   public NodeSong getCurrentSong() {
-    return currentSong;
+    if (!queue.isEmpty()) {
+      return queue.peek();
+    }
+    return null;
   }
 
-  public void historySong() {
-    System.out.println("Play History:");
-    if (history.isEmpty()) {
-      System.out.println("No songs played yet.");
-    } else {
-      StackSong tempStack = new StackSong();
-      while (!history.isEmpty()) {
-        NodeSong song = history.pop();
-        tempStack.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
-      }
-      while (!tempStack.isEmpty()) {
-        NodeSong song = tempStack.pop();
-        System.out.println("- " + song.getSongId());
-        history.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
-      }
+  public NodeSong rewindToPreviousSong() {
+    if (!history.isEmpty()) {
+      NodeSong prevSong = history.pop();
+      queue.enqueueAtFront(prevSong);
+      return prevSong;
     }
+    return null;
   }
 
-  public void displayQueue() {
-    System.out.println("Song Queue:");
-    if (queue.isEmpty()) {
-      System.out.println("Queue is empty.");
-    } else {
-      for (NodeSong song : queue) {
-        System.out.println("- " + song.getSongId());
-      }
+  public NodeSong playNextSong() {
+    if (!queue.isEmpty()) {
+      NodeSong nextSong = queue.dequeue();
+      history.push(nextSong.getSongId(), nextSong.getTitle(), nextSong.getArtist(),
+          nextSong.getDuration());
+      return nextSong;
     }
+    return null;
   }
 
-  public List<NodeSong> getAllSong() {
-    List<NodeSong> allSongs = new ArrayList<>();
-    for (NodeSong song : queue) {
-      allSongs.add(song);
-    }
-    return allSongs;
+  public boolean hasNext() {
+    return !queue.isEmpty();
+  }
+
+  public boolean hasPrev() {
+    return !history.isEmpty();
   }
 }

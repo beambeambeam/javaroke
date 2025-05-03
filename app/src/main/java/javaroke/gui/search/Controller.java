@@ -66,7 +66,7 @@ public class Controller extends SceneController implements Initializable {
       for (String queuedSong : queueList.getItems()) {
         for (Item item : items) {
           if ((item.getTitle() + " " + item.getArtist()).equals(queuedSong)) {
-            storageSongQueue.addSong(item.getId(), item.getTitle(), item.getArtist(), 0);
+            storageSongQueue.enqueueSong(item.getId(), item.getTitle(), item.getArtist(), 0);
             break;
           }
         }
