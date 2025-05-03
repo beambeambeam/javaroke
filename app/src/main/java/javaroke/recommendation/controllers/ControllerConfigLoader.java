@@ -13,9 +13,18 @@ public class ControllerConfigLoader {
     private static final Logger LOGGER = Logger.getLogger(ControllerConfigLoader.class.getName());
     private static final String CONFIG_PATH =
             "src/main/java/javaroke/recommendation/controllers/config.json";
+    private static Map<String, String> configMap = null;
 
     public static String get(String key) {
-        return loadConfig().get(key);
+        if (configMap == null) {
+            configMap = loadConfig();
+        }
+
+        return configMap.get(key);
+    }
+
+    public static void updateConfig() {
+        configMap = loadConfig();
     }
 
     public static Map<String, String> loadConfig() {

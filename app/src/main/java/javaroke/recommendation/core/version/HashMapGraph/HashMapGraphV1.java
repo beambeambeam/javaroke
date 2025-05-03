@@ -1,14 +1,18 @@
 package javaroke.recommendation.core.version.HashMapGraph;
 
+import javaroke.recommendation.core.algorithms.pathFinding.FloydWallshallForHashMapGraph;
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
+import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmapGraph;
 import javafx.util.Pair;
 import java.util.Queue;
 
 public class HashMapGraphV1 extends HashMapGraphVersion {
     @Override
     public void process(HashMapGraph graph) {
-        // Implement the processing logic for version 1
-        System.out.println("Processing graph in version 1");
+        WeightTransformerForHashmapGraph.invertWeights(graph);
+        WeightTransformerForHashmapGraph.applyBiasToFloor(graph, 10);
+        WeightTransformerForHashmapGraph.applyExponentialTransformToWeights(graph, 2);
+        FloydWallshallForHashMapGraph.floydWarshall(graph);
     }
 
     @Override
