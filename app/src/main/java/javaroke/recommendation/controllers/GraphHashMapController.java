@@ -3,9 +3,8 @@ package javaroke.recommendation.controllers;
 import javaroke.recommendation.core.models.graphs.GraphHashMap;
 // import javaroke.recommendation.core.utils.metrics.PerformanceTracker;
 import javaroke.recommendation.core.utils.saves.GraphHashMapIO;
-import javaroke.recommendation.core.version.floydVersion.RecommendationVersion;
-import javaroke.recommendation.core.version.floydVersion.VersionFactory;
-
+import javaroke.recommendation.core.version.RecommendationVersion;
+import javaroke.recommendation.core.version.VersionFactory;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Queue;

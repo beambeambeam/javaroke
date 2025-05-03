@@ -1,4 +1,4 @@
-package javaroke.recommendation.core.version.floydVersion;
+package javaroke.recommendation.core.version;
 
 import java.util.Queue;
 import java.util.logging.Level;

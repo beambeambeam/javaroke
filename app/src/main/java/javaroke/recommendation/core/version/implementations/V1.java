@@ -1,12 +1,13 @@
-package javaroke.recommendation.core.version.floydVersion;
+package javaroke.recommendation.core.version.implementations;
 
 import java.util.Queue;
 import javafx.util.Pair;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javaroke.recommendation.core.algorithms.GraphAlgorithmForHashMap;
+import javaroke.recommendation.core.algorithms.pathFinding.floydWallshall.FloydWallshallForGraphHashMap;
 import javaroke.recommendation.core.models.graphs.GraphHashMap;
 import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmap;
+import javaroke.recommendation.core.version.RecommendationVersion;
 
 public class V1 extends RecommendationVersion<GraphHashMap> {
     private static final Logger LOGGER = Logger.getLogger(V1.class.getName());
@@ -44,7 +45,7 @@ public class V1 extends RecommendationVersion<GraphHashMap> {
 
             // Apply Floyd-Warshall algorithm
             long startTime = System.currentTimeMillis();
-            GraphAlgorithmForHashMap.floydWarshall(graph);
+            FloydWallshallForGraphHashMap.floydWarshall(graph);
             long endTime = System.currentTimeMillis();
 
             logProcessingInfo("Completed Floyd-Warshall in " + (endTime - startTime) + "ms");

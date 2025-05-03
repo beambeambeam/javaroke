@@ -1,6 +1,6 @@
 package javaroke.recommendation.controllers;
 
-import javaroke.recommendation.core.utils.AdjacencyMatrixUtils;
+import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixRead;
 
 public class RecommendationController {
         public static void main(String[] args) {
@@ -8,10 +8,10 @@ public class RecommendationController {
                                 "src/main/java/javaroke/recommendation/core/data/saves/", "v1",
                                 "src/main/java/javaroke/recommendation/core/data/saves/graph.json");
 
-                AdjacencyMatrixUtils.printAdjacencyMatrix(
+                AdjacencyMatrixRead.printAdjacencyMatrix(
                                 graphHashMapTypeController.getGraph().getAdjacencyMetrix());
                 graphHashMapTypeController.processGraph();
-                AdjacencyMatrixUtils.printAdjacencyMatrix(
+                AdjacencyMatrixRead.printAdjacencyMatrix(
                                 graphHashMapTypeController.getGraph().getAdjacencyMetrix());
 
         }

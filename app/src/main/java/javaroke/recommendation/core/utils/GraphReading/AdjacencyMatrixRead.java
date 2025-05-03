@@ -1,8 +1,8 @@
-package javaroke.recommendation.core.utils;
+package javaroke.recommendation.core.utils.GraphReading;
 
 import java.util.List;
 
-public class AdjacencyMatrixUtils {
+public class AdjacencyMatrixRead {
     public static void printAdjacencyMatrix(double[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {

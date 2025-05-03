@@ -1,4 +1,4 @@
-package javaroke.recommendation.core.algorithms;
+package javaroke.recommendation.core.algorithms.pathFinding.floydWallshall;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import javaroke.recommendation.core.models.graphs.GraphHashMap;
 
-public class GraphAlgorithmForHashMap {
+public class FloydWallshallForGraphHashMap {
     static class NodeForDijkstraTraversal {
         String name;
         double distance;
