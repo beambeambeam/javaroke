@@ -197,6 +197,7 @@ public class GraphHashMapController {
      * Placeholder for the PerformanceTracker class - would be implemented separately
      */
     public static class PerformanceTracker {
+        @SuppressWarnings("unused")
         private String versionName;
 
         public PerformanceTracker(String versionName) {
