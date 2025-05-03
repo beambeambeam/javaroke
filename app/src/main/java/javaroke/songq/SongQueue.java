@@ -32,13 +32,13 @@ public class SongQueue {
     }
   }
 
-  public List<NodeSong> getAllSongs() {
-    List<NodeSong> allSongs = new ArrayList<>();
-
+  public List<NodeSong> getPendingSongs() {
+    List<NodeSong> pendingSongs = new ArrayList<>();
     QueueSong tempQueue = new QueueSong();
+
     while (!queue.isEmpty()) {
       NodeSong song = queue.dequeue();
-      allSongs.add(song);
+      pendingSongs.add(song);
       tempQueue.enqueue(song);
     }
 
@@ -46,10 +46,16 @@ public class SongQueue {
       queue.enqueue(tempQueue.dequeue());
     }
 
+    return pendingSongs;
+  }
+
+  public List<NodeSong> getHistorySongs() {
+    List<NodeSong> historySongs = new ArrayList<>();
     StackSong tempStack = new StackSong();
+
     while (!history.isEmpty()) {
       NodeSong song = history.pop();
-      allSongs.add(song);
+      historySongs.add(song);
       tempStack.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
     }
 
@@ -58,6 +64,13 @@ public class SongQueue {
       history.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
     }
 
+    return historySongs;
+  }
+
+  public List<NodeSong> getAllSongs() {
+    List<NodeSong> allSongs = new ArrayList<>();
+    allSongs.addAll(getPendingSongs());
+    allSongs.addAll(getHistorySongs());
     return allSongs;
   }
 
