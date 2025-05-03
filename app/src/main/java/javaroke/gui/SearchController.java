@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -19,6 +20,9 @@ public class SearchController extends SceneController implements Initializable {
 
   @FXML
   private ListView<String> queueList;
+
+  @FXML
+  private Button karaokeButton;
 
   private List<Item> items;
 
@@ -123,5 +127,12 @@ public class SearchController extends SceneController implements Initializable {
         }
       }
     });
+
+    karaokeButton.setDisable(queueList.getItems().isEmpty());
+
+    queueList.getItems()
+        .addListener((javafx.collections.ListChangeListener.Change<? extends String> change) -> {
+          karaokeButton.setDisable(queueList.getItems().isEmpty());
+        });
   }
 }

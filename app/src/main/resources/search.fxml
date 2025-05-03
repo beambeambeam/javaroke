@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0"
-  xmlns="http://javafx.com/javafx/23.0.1"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.SearchController">
+<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.SearchController">
   <children>
     <VBox alignment="CENTER" prefHeight="400.0" prefWidth="100.0">
       <children>
@@ -31,7 +29,7 @@
             <Insets />
           </opaqueInsets>
         </HBox>
-        <Button mnemonicParsing="false" onAction="#switchToScene3" text="Let's Sing!" />
+        <Button fx:id="karaokeButton" mnemonicParsing="false" onAction="#switchToScene3" text="Let's Sing!" />
       </children>
     </VBox>
   </children>
