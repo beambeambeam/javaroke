@@ -21,6 +21,9 @@ public class SongQueue {
   public void addSong(String songId, String title, String artist, int duration) {
     NodeSong newSong = new NodeSong(songId, title, artist, duration);
     queue.enqueue(newSong);
+    if (currentSong == null) {
+      currentSong = queue.peek();
+    }
   }
 
   public NodeSong removeSong() {
