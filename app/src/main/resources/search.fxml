@@ -12,17 +12,35 @@
   xmlns="http://javafx.com/javafx/23.0.1"
   xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.search.Controller">
   <children>
-    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="100.0">
+    <VBox alignment="CENTER" spacing="12.0">
       <children>
         <Label text="Song Recommend!">
           <font>
             <Font name="Helvetica" size="36.0" />
           </font>
         </Label>
-        <HBox alignment="CENTER" prefHeight="500.0" prefWidth="200.0">
+        <HBox alignment="CENTER" prefHeight="500.0" prefWidth="200.0" spacing="24.0">
           <children>
-            <ListView fx:id="songList" prefHeight="200.0" />
-            <ListView fx:id="queueList" prefHeight="200.0" />
+            <VBox alignment="CENTER" spacing="12.0">
+              <children>
+                <Label text="เพลงในระบบ">
+                  <font>
+                    <Font size="18.0" />
+                  </font>
+                </Label>
+                <ListView fx:id="songList" />
+              </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="12.0">
+              <children>
+                <Label text="เพลงที่เลือก">
+                  <font>
+                    <Font size="18.0" />
+                  </font>
+                </Label>
+                <ListView fx:id="queueList" />
+              </children>
+            </VBox>
           </children>
           <VBox.margin>
             <Insets left="200.0" right="200.0" />
