@@ -181,6 +181,10 @@ public abstract class RecommendationController<T, V> {
                 return path.endsWith("/") ? path : path + "/";
         }
 
+        protected void logProcessingInfo(String message) {
+                LOGGER.log(Level.INFO, "{0}: {1}", new Object[] {getVersionName(), message});
+        }
+
         // Abstract methods that subclasses must implement
         protected abstract T createNewGraph();
 
