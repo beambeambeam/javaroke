@@ -46,6 +46,6 @@ public abstract class RecommendationVersion<T extends GraphInterface> {
      * Helper method to log processing information
      */
     protected void logProcessingInfo(String message) {
-        LOGGER.log(Level.INFO, "{0}: {1}", new Object[] {getVersionName(), message});
+        LOGGER.log(Level.INFO, "{0}: {1}\n", new Object[] {getVersionName(), message});
     }
 }

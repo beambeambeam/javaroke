@@ -3,7 +3,7 @@ package javaroke.recommendation.core.utils.GraphReading;
 import java.util.List;
 
 public class AdjacencyMatrixRead {
-    public static void printAdjacencyMatrix(double[][] matrix) {
+    public static void printAdjacencyMetrix(double[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 System.out.printf("%.3f", matrix[i][j]);
@@ -14,7 +14,7 @@ public class AdjacencyMatrixRead {
         System.out.println();
     }
 
-    public static void printPreviosVertexMatrix(String[][] matrix) {
+    public static void printPreviosVertexMetrix(String[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 System.out.print(matrix[i][j] + "\t");
