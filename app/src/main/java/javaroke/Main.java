@@ -1,9 +1,9 @@
 package javaroke;
 
-import javaroke.gui.Controller;
+import javaroke.gui.GUI;
 
 public class Main {
   public static void main(String[] args) {
-    Controller.main(args);
+    GUI.main(args);
   }
 }
