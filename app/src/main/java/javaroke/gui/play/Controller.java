@@ -18,8 +18,6 @@ public class Controller extends SceneController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    System.out.println("Loading 3 !");
-
     queueList.getItems().addAll(storageSongQueue.getAllSong().stream()
         .map(song -> song.getTitle() + " " + song.getArtist()).toList());
 

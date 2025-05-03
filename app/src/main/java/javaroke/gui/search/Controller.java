@@ -29,7 +29,6 @@ public class Controller extends SceneController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    System.out.println("Switch to Search View");
     Item.loadItemsFromFolder("src/main/resources/songs", items);
 
     for (Item item : items) {
