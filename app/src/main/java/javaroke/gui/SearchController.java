@@ -1,5 +1,6 @@
 package javaroke.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javaroke.songq.SongQueue;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.*;
 
 public class SearchController extends SceneController implements Initializable {
+  DataSingleton data = DataSingleton.getInstance();
+  SongQueue externalQueueList = data.getSongQueue();
+
   @FXML
   private ListView<String> songList;
 
@@ -134,5 +139,22 @@ public class SearchController extends SceneController implements Initializable {
         .addListener((javafx.collections.ListChangeListener.Change<? extends String> change) -> {
           karaokeButton.setDisable(queueList.getItems().isEmpty());
         });
+
+    karaokeButton.setOnAction(event -> {
+      for (String queuedSong : queueList.getItems()) {
+        for (Item item : items) {
+          if ((item.getTitle() + " " + item.getArtist()).equals(queuedSong)) {
+            externalQueueList.addSong(item.getId(), item.getTitle(), item.getArtist(), 0);
+            break;
+          }
+        }
+      }
+
+      try {
+        switchToScene3(event);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 }
