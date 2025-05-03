@@ -21,7 +21,7 @@ public class GUI extends Application {
     loader.setLocation(getClass().getResource("/main.fxml"));
     Parent content = loader.load();
 
-    Scene scene = new Scene(content, 640, 480);
+    Scene scene = new Scene(content);
     stage.setScene(scene);
     stage.show();
   }
