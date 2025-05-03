@@ -25,6 +25,7 @@ public class AdjacencyMatrixUtils {
     }
 
     public static void printPath(List<String> path) {
+        System.out.print(path.get(0) + " -> " + path.get(path.size() - 1) + ": ");
         for (String node : path) {
             System.out.print(node + " ");
         }

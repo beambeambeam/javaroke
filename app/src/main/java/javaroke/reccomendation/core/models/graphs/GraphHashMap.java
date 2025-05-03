@@ -1,6 +1,7 @@
-package javaroke.reccomendation.core.graphs;
+package javaroke.reccomendation.core.models.graphs;
 
 import java.util.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class GraphHashMap implements GraphInterface {
     // Use to keep track of the previous vertex in the shortest path algorithm
@@ -110,6 +111,7 @@ public class GraphHashMap implements GraphInterface {
         }
     }
 
+    @JsonIgnore
     public double[][] getAdjacencyMetrix() {
         double[][] adjacencyMatrix = new double[size][size];
 
@@ -127,6 +129,7 @@ public class GraphHashMap implements GraphInterface {
         return adjacencyMatrix;
     }
 
+    @JsonIgnore
     public String[][] getPreviousVertexMetrix() {
         String[][] previousVertexMetrix = new String[size][size];
 

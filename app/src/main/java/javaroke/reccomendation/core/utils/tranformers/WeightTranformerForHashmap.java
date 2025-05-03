@@ -1,6 +1,6 @@
 package javaroke.reccomendation.core.utils.tranformers;
 
-import javaroke.reccomendation.core.graphs.GraphHashMap;
+import javaroke.reccomendation.core.models.graphs.GraphHashMap;
 
 public class WeightTranformerForHashmap {
     // The default graph used positive weights for popularity

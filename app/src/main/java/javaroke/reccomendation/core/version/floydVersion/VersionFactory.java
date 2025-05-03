@@ -1,9 +1,9 @@
-package javaroke.reccomendation.core.version;
+package javaroke.reccomendation.core.version.floydVersion;
 
-import javaroke.reccomendation.core.graphs.GraphHashMap;
+import javaroke.reccomendation.core.models.graphs.GraphHashMap;
 
 public class VersionFactory {
-    public static VersionAbstract<GraphHashMap> getVersion(String version) {
+    public static ReccomendationVersion<GraphHashMap> getVersion(String version) {
         return switch (version) {
             case "v1" -> new V1<GraphHashMap>();
             case "v2" -> new V2<GraphHashMap>();

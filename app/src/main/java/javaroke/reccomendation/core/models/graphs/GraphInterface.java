@@ -1,4 +1,4 @@
-package javaroke.reccomendation.core.graphs;
+package javaroke.reccomendation.core.models.graphs;
 
 public interface GraphInterface {
 

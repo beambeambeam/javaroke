@@ -1,8 +1,7 @@
 package javaroke.reccomendation.tests;
 
-import java.nio.file.Paths;
 import javaroke.reccomendation.core.algorithms.GraphAlgorithmForHashMap;
-import javaroke.reccomendation.core.graphs.GraphHashMap;
+import javaroke.reccomendation.core.models.graphs.GraphHashMap;
 import javaroke.reccomendation.core.utils.AdjacencyMatrixUtils;
 import javaroke.reccomendation.core.utils.saves.GraphHashMapIO;
 import javaroke.reccomendation.core.utils.tranformers.WeightTranformerForHashmap;
@@ -44,7 +43,20 @@ public class Graph {
         AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         AdjacencyMatrixUtils.printPreviosVertexMatrix(graph.getPreviousVertexMetrix());
         AdjacencyMatrixUtils.printPath(
+                GraphAlgorithmForHashMap.reconstructPathFromGraphHashMap(graph, "A", "D"));
+        AdjacencyMatrixUtils.printPath(
                 GraphAlgorithmForHashMap.reconstructPathFromGraphHashMap(graph, "E", "C"));
+
+        ;
+        WeightTranformerForHashmap.invertWeights(graph);
+        WeightTranformerForHashmap.applyBiasToFloor(graph, 10);
+        WeightTranformerForHashmap.applyAdditiveTransformToWeights(graph, 3);
+        WeightTranformerForHashmap.applyExponentialTransformToWeights(graph, 2);
+        WeightTranformerForHashmap.normalizeWeightsToRange01(graph);
+        WeightTranformerForHashmap.applyMultiplicativeTransformToWeights(graph, 0.5);
+        GraphAlgorithmForHashMap.floydWarshall(graph);
+        AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
+        AdjacencyMatrixUtils.printPreviosVertexMatrix(graph.getPreviousVertexMetrix());
 
     }
 

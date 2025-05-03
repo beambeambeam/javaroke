@@ -1,18 +1,20 @@
-package javaroke.reccomendation.core.version;
+package javaroke.reccomendation.core.version.floydVersion;
 
+import java.util.Queue;
+import javafx.util.Pair;
 import javaroke.reccomendation.core.algorithms.GraphAlgorithmForHashMap;
-import javaroke.reccomendation.core.graphs.GraphHashMap;
+import javaroke.reccomendation.core.models.graphs.GraphHashMap;
 import javaroke.reccomendation.core.utils.tranformers.WeightTranformerForHashmap;
 
-public class V1<T> extends VersionAbstract<T> {
+public class V2<T> extends ReccomendationVersion<T> {
     @Override
     public String getVersion() {
-        return "1.0.0";
+        return "2.0.0";
     }
 
     @Override
     public String getVersionName() {
-        return "v1";
+        return "v2";
     }
 
     @Override
@@ -29,5 +31,9 @@ public class V1<T> extends VersionAbstract<T> {
         WeightTranformerForHashmap.applyBiasToFloor(graph, 10);
         WeightTranformerForHashmap.applyExponentialTransformToWeights(graph, 2);
         GraphAlgorithmForHashMap.floydWarshall(graph);
+    }
+
+    public void shortUpdate(T graph, Queue<Pair<String, String>> queue) {
+
     }
 }
