@@ -3,6 +3,8 @@ package javaroke.songq;
 import javaroke.queue.QueueSong;
 import javaroke.stack.StackSong;
 import javaroke.models.NodeSong;
+import java.util.List;
+import java.util.ArrayList;
 
 public class SongQueue {
 
@@ -61,5 +63,13 @@ public class SongQueue {
         System.out.println("- " + song.getSongId());
       }
     }
+  }
+
+  public List<NodeSong> getAllSong() {
+    List<NodeSong> allSongs = new ArrayList<>();
+    for (NodeSong song : queue) {
+      allSongs.add(song);
+    }
+    return allSongs;
   }
 }

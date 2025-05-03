@@ -20,7 +20,7 @@ import com.google.gson.*;
 
 public class Controller extends SceneController implements Initializable {
   DataSingleton data = DataSingleton.getInstance();
-  SongQueue externalQueueList = data.getSongQueue();
+  SongQueue storageSongQueue = data.getSongQueue();
 
   @FXML
   private ListView<String> songList;
@@ -146,7 +146,7 @@ public class Controller extends SceneController implements Initializable {
       for (String queuedSong : queueList.getItems()) {
         for (Item item : items) {
           if ((item.getTitle() + " " + item.getArtist()).equals(queuedSong)) {
-            externalQueueList.addSong(item.getId(), item.getTitle(), item.getArtist(), 0);
+            storageSongQueue.addSong(item.getId(), item.getTitle(), item.getArtist(), 0);
             break;
           }
         }
