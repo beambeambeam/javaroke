@@ -108,7 +108,7 @@ public class Controller extends SceneController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     System.out.println("Switch to Search View");
-    loadItemsFromFolder("src/main/songs");
+    loadItemsFromFolder("src/main/resources/songs");
     if (items != null) {
       for (Item item : items) {
         songList.getItems().add(item.getTitle() + " " + item.artist);
