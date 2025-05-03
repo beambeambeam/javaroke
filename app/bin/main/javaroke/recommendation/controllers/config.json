@@ -1,0 +1,5 @@
+{
+"SAVE_FOLDER": "app/src/main/java/javaroke/recommendation/saves",
+"BACKUP_FOLDER": "app/src/main/java/javaroke/recommendation/data/backup",
+"BACKUP_AMOUNT": 20
+}
