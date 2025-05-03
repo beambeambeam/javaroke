@@ -1,4 +1,4 @@
-package javaroke.reccomendation.core.models.graphs;
+package javaroke.recommendation.core.models.graphs;
 
 import java.util.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;

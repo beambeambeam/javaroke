@@ -1,4 +1,4 @@
-package javaroke.reccomendation.core.utils;
+package javaroke.recommendation.core.utils;
 
 import java.util.List;
 

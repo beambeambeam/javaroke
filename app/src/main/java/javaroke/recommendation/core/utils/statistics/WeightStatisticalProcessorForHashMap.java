@@ -1,4 +1,4 @@
-package javaroke.reccomendation.core.utils.statistics;
+package javaroke.recommendation.core.utils.statistics;
 
 public class WeightStatisticalProcessorForHashMap {
 

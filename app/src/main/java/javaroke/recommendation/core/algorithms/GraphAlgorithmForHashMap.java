@@ -1,4 +1,4 @@
-package javaroke.reccomendation.core.algorithms;
+package javaroke.recommendation.core.algorithms;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
-import javaroke.reccomendation.core.models.graphs.GraphHashMap;
+import javaroke.recommendation.core.models.graphs.GraphHashMap;
 
 public class GraphAlgorithmForHashMap {
     static class NodeForDijkstraTraversal {

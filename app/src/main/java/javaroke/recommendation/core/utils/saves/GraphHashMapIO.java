@@ -1,10 +1,10 @@
-package javaroke.reccomendation.core.utils.saves;
+package javaroke.recommendation.core.utils.saves;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javaroke.reccomendation.core.models.graphs.GraphHashMap;
+import javaroke.recommendation.core.models.graphs.GraphHashMap;
 
 public class GraphHashMapIO {
     public static void saveGraphHashMap(GraphHashMap graph, String filename) throws Exception {

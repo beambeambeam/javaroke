@@ -4,17 +4,15 @@ import javaroke.recommendation.core.utils.AdjacencyMatrixUtils;
 
 public class RecommendationController {
         public static void main(String[] args) {
-                GraphHashMapTypeController graphHashMapTypeController =
-                                new GraphHashMapTypeController(
-                                                "src/main/java/javaroke/reccomendation/core/data/saves/",
-                                                "v1",
-                                                "src/main/java/javaroke/reccomendation/core/data/saves/graph.json");
+                GraphHashMapController graphHashMapTypeController = new GraphHashMapController(
+                                "src/main/java/javaroke/recommendation/core/data/saves/", "v1",
+                                "src/main/java/javaroke/recommendation/core/data/saves/graph.json");
 
                 AdjacencyMatrixUtils.printAdjacencyMatrix(
-                                graphHashMapTypeController.graph.getAdjacencyMetrix());
+                                graphHashMapTypeController.getGraph().getAdjacencyMetrix());
                 graphHashMapTypeController.processGraph();
                 AdjacencyMatrixUtils.printAdjacencyMatrix(
-                                graphHashMapTypeController.graph.getAdjacencyMetrix());
+                                graphHashMapTypeController.getGraph().getAdjacencyMetrix());
 
         }
 }

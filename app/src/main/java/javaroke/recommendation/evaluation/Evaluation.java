@@ -1,4 +1,4 @@
-package javaroke.reccomendation.evaluation;
+package javaroke.recommendation.evaluation;
 
 public class Evaluation {
 
