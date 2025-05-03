@@ -14,7 +14,7 @@ import javaroke.recommendation.core.models.graphs.GraphInterface;
  * @param <T> The graph implementation type this version works with
  */
 public abstract class RecommendationVersion<T extends GraphInterface> {
-    private static final Logger LOGGER = Logger.getLogger(RecommendationVersion.class.getName());
+    protected static final Logger LOGGER = Logger.getLogger(RecommendationVersion.class.getName());
 
     /**
      * Gets the semantic version number (e.g., "1.0.0")

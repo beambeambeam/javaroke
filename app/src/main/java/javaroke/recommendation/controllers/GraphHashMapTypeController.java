@@ -5,14 +5,13 @@ import java.nio.file.Paths;
 import java.util.Queue;
 import javafx.util.Pair;
 import javaroke.recommendation.core.models.graphs.GraphHashMap;
-import javaroke.recommendation.core.models.graphs.GraphInterface;
 import javaroke.recommendation.core.utils.saves.GraphHashMapIO;
 import javaroke.recommendation.core.version.floydVersion.RecommendationVersion;
 import javaroke.recommendation.core.version.floydVersion.VersionFactory;
 
 public class GraphHashMapTypeController {
     GraphHashMap graph;
-    RecommendationVersion<GraphInterface> version;
+    RecommendationVersion<GraphHashMap> version;
     String savePath;
 
     public GraphHashMapTypeController(String savePath, String version) {

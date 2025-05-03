@@ -1,8 +1,8 @@
-package javaroke.reccomendation.core.utils.tranformers;
+package javaroke.recommendation.core.utils.tranformers;
 
-import javaroke.reccomendation.core.models.graphs.GraphHashMap;
+import javaroke.recommendation.core.models.graphs.GraphHashMap;
 
-public class WeightTranformerForHashmap {
+public class WeightTransformerForHashmap {
     // The default graph used positive weights for popularity
     // The more weight it has mean the more popular it is
     // But for shortest path algorithm we need to use flip this weights

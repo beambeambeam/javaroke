@@ -1,13 +1,18 @@
 package javaroke.recommendation.core.version.floydVersion;
 
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.util.Pair;
 import javaroke.recommendation.core.algorithms.GraphAlgorithmForHashMap;
 import javaroke.recommendation.core.models.graphs.GraphHashMap;
-import javaroke.recommendation.core.models.graphs.GraphInterface;
-import javaroke.recommendation.core.utils.tranformers.WeightTranformerForHashmap;
+import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmap;
 
-public class V2 extends RecommendationVersion<GraphInterface> {
+public class V2 extends RecommendationVersion<GraphHashMap> {
+    private static final Logger LOGGER = Logger.getLogger(V1.class.getName());
+    private static final double BIAS_VALUE = 10.0;
+    private static final double EXPONENT_VALUE = 2.0;
+
     @Override
     public String getVersion() {
         return "2.0.0";
@@ -19,22 +24,45 @@ public class V2 extends RecommendationVersion<GraphInterface> {
     }
 
     @Override
-    public void process(GraphInterface graph) {
-        if (graph instanceof GraphHashMap) {
-            processWithGraphHashMap((GraphHashMap) graph);
-        } else {
-            throw new IllegalArgumentException("Graph must be an instance of GraphHashMap");
+    public void process(GraphHashMap graph) {
+        if (graph == null) {
+            throw new IllegalArgumentException("Graph cannot be null");
+        }
+
+        logProcessingInfo("Starting graph processing");
+
+        try {
+            // Apply weight transformations
+            WeightTransformerForHashmap.invertWeights(graph);
+            logProcessingInfo("Inverted weights");
+
+            WeightTransformerForHashmap.applyBiasToFloor(graph, BIAS_VALUE);
+            logProcessingInfo("Applied bias to floor: " + BIAS_VALUE);
+
+            WeightTransformerForHashmap.applyExponentialTransformToWeights(graph, EXPONENT_VALUE);
+            logProcessingInfo("Applied exponential transformation: " + EXPONENT_VALUE);
+
+            // Apply Floyd-Warshall algorithm
+            long startTime = System.currentTimeMillis();
+            GraphAlgorithmForHashMap.floydWarshall(graph);
+            long endTime = System.currentTimeMillis();
+
+            logProcessingInfo("Completed Floyd-Warshall in " + (endTime - startTime) + "ms");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error processing graph with " + getVersionName(), e);
+            throw new RuntimeException("Failed to process graph with " + getVersionName(), e);
         }
     }
 
-    public void processWithGraphHashMap(GraphHashMap graph) {
-        WeightTranformerForHashmap.invertWeights(graph);
-        WeightTranformerForHashmap.applyBiasToFloor(graph, 10);
-        WeightTranformerForHashmap.applyExponentialTransformToWeights(graph, 2);
-        GraphAlgorithmForHashMap.floydWarshall(graph);
-    }
+    @Override
+    public void shortUpdate(GraphHashMap graph, Queue<Pair<String, String>> queue) {
+        if (queue == null || queue.isEmpty()) {
+            return;
+        }
 
-    public void shortUpdate(GraphInterface graph, Queue<Pair<String, String>> queue) {
-
+        logProcessingInfo("Short update requested with " + queue.size() + " items");
+        // For V1, we don't have an incremental update implementation
+        // so we just reprocess the entire graph
+        process(graph);
     }
 }

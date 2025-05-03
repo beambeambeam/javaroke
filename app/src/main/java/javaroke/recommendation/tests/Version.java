@@ -1,4 +1,4 @@
-package javaroke.reccomendation.tests;
+package javaroke.recommendation.tests;
 
 
 public class Version {

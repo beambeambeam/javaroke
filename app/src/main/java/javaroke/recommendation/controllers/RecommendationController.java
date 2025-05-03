@@ -1,18 +1,20 @@
-package javaroke.reccomendation.controllers;
+package javaroke.recommendation.controllers;
 
-import javaroke.reccomendation.core.utils.AdjacencyMatrixUtils;
+import javaroke.recommendation.core.utils.AdjacencyMatrixUtils;
 
 public class RecommendationController {
-    public static void main(String[] args) {
-        GraphHashMapTypeController graphHashMapTypeController = new GraphHashMapTypeController(
-                "src/main/java/javaroke/reccomendation/core/data/saves/", "v1",
-                "src/main/java/javaroke/reccomendation/core/data/saves/graph.json");
+        public static void main(String[] args) {
+                GraphHashMapTypeController graphHashMapTypeController =
+                                new GraphHashMapTypeController(
+                                                "src/main/java/javaroke/reccomendation/core/data/saves/",
+                                                "v1",
+                                                "src/main/java/javaroke/reccomendation/core/data/saves/graph.json");
 
-        AdjacencyMatrixUtils
-                .printAdjacencyMatrix(graphHashMapTypeController.graph.getAdjacencyMetrix());
-        graphHashMapTypeController.processGraph();
-        AdjacencyMatrixUtils
-                .printAdjacencyMatrix(graphHashMapTypeController.graph.getAdjacencyMetrix());
+                AdjacencyMatrixUtils.printAdjacencyMatrix(
+                                graphHashMapTypeController.graph.getAdjacencyMetrix());
+                graphHashMapTypeController.processGraph();
+                AdjacencyMatrixUtils.printAdjacencyMatrix(
+                                graphHashMapTypeController.graph.getAdjacencyMetrix());
 
-    }
+        }
 }
