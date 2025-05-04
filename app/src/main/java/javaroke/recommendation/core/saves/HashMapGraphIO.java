@@ -1,4 +1,4 @@
-package javaroke.recommendation.core.utils.saves;
+package javaroke.recommendation.core.saves;
 
 import java.io.File;
 import java.nio.file.Files;

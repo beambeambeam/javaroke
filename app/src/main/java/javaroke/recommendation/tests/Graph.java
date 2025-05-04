@@ -2,8 +2,8 @@ package javaroke.recommendation.tests;
 
 import javaroke.recommendation.core.algorithms.pathFinding.FloydWallshallForHashMapGraph;
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
+import javaroke.recommendation.core.saves.HashMapGraphIO;
 import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixPrinter;
-import javaroke.recommendation.core.utils.saves.HashMapGraphIO;
 import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmapGraph;
 
 public class Graph {

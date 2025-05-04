@@ -32,3 +32,21 @@ recommendation/
 - `evaluation/` is where you validate ideas and measure performance.
 
 - All testing lives in `tests/`, runnable via a Gradle script to ensure stability.
+
+feat: Add flexible recommendation system.
+
+- properties:
+  - Design to handle flexibly based data type. Such as using `graph`, `tree`, or `neural`.
+  - Design `utils` and `algoritm` to implement those function based on each based data type to optimize cpu and ram consump.
+  - Design `version` and `controller` to
+- architecture desigh:
+  - `Core/`: For keeping the all calculat process
+    - `models/`: For keeping based data type like `HashMapGraph` or any Tree models within interface for each based type. Including the `saves` or `items` data clase.
+    - `utils/`: For keeping utilization tools for each based data type like `WeightTransformerForHashMapGraph` or `PerformanceTracker` metrics. Use to clean, manage, and analyze with reuse function.
+    - `algorithms/`: For keeping specifig function for each based data type. For example path finding on graph baed data type, If use AI model, it will require model loader.
+    - `saves/`: Keep saving function for each data type and algoritm usage. Within back up function that handle those save and delete.
+    - `version/`: Separate folder to each based data type. And handle those `utils/`, `algorithms/` usage with version abstract.
+  - `Controller/`: Separte folder to each based data type. And handle those `version/` with `saves/` usage. And handle those same based data version with `BasedDataType-Controller`, Then call each version from based data type to use.
+  - `datas/`: use to keep saves and back up file.
+  - `test/ `: use to develop new function and test without affect to main.
+  - `evaluate/`: use to test complete model.

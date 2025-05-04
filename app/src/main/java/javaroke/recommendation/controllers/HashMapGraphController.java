@@ -4,14 +4,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
 import javaroke.recommendation.core.models.items.MyPair;
+import javaroke.recommendation.core.saves.HashMapGraphIO;
 import javaroke.recommendation.core.utils.metrics.PerformanceTracker;
-import javaroke.recommendation.core.utils.saves.HashMapGraphIO;
 import javaroke.recommendation.core.version.HashMapGraph.HashMapGraphV1;
 import javaroke.recommendation.core.version.HashMapGraph.HashMapGraphV2;
 import javaroke.recommendation.core.version.HashMapGraph.HashMapGraphVersion;
@@ -183,5 +184,9 @@ public class HashMapGraphController {
 
     public HashMapGraphVersion getVersion() {
         return version;
+    }
+
+    public Map<String, Object> getMetricSummary() {
+        return tracker.getMetricSummary();
     }
 }

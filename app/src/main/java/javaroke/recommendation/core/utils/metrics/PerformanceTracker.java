@@ -17,7 +17,7 @@ public class PerformanceTracker {
     private final Map<MetricType, List<MetricEntry>> metrics;
 
     public enum MetricType {
-        LOAD, UPDATE, PROCESS, INCREMENTAL_UPDATE
+        LOAD, UPDATE, PROCESS, GET_RECCOMMEND
     }
 
     public PerformanceTracker(String versionName) {
@@ -44,10 +44,9 @@ public class PerformanceTracker {
         LOGGER.fine("Recorded process time: " + timeMs + "ms");
     }
 
-    public void recordIncrementalUpdateTime(long timeMs, int updateCount) {
-        metrics.get(MetricType.INCREMENTAL_UPDATE).add(new MetricEntry(timeMs, updateCount));
-        LOGGER.fine("Recorded incremental update time: " + timeMs + "ms for " + updateCount
-                + " updates");
+    public void recordGetReccommendList(long timeMs) {
+        metrics.get(MetricType.GET_RECCOMMEND).add(new MetricEntry(timeMs, 1));
+        LOGGER.fine("Recorded get recomend list time: " + timeMs + "ms ");
     }
 
     public Map<String, Object> getMetricSummary() {
@@ -85,7 +84,7 @@ public class PerformanceTracker {
             typeStats.put("minTimeMs", timeStats.getMin());
             typeStats.put("maxTimeMs", timeStats.getMax());
 
-            if (type == MetricType.UPDATE || type == MetricType.INCREMENTAL_UPDATE) {
+            if (type == MetricType.UPDATE || type == MetricType.GET_RECCOMMEND) {
                 typeStats.put("totalItems", countStats.getSum());
                 typeStats.put("avgItems", countStats.getAverage());
 

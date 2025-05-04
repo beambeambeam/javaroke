@@ -30,6 +30,7 @@ public class AdjacencyMatrixPrinter {
             System.out.print(vertex + " ");
         }
         System.out.println();
+        System.out.println();
     }
 
     public static void printPath(List<String> path) {
@@ -37,6 +38,7 @@ public class AdjacencyMatrixPrinter {
         for (String node : path) {
             System.out.print(node + " ");
         }
+        System.out.println();
         System.out.println();
     }
 }
