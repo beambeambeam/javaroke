@@ -22,6 +22,8 @@ public class GUI extends Application {
     Parent content = loader.load();
 
     Scene scene = new Scene(content);
+    // Apply the CSS stylesheet
+    scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
     stage.setScene(scene);
     stage.show();
   }

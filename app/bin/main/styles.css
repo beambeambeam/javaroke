@@ -1,0 +1,65 @@
+/* General Styles */
+.root {
+    -fx-background-color: #FFFFFF; /* White background */
+    -fx-font-family: "System"; /* Default system font */
+}
+
+/* Label Styles */
+.label {
+    -fx-text-fill: #01758F;
+    -fx-font-size: 14px;
+}
+
+/* Title Label Style (using a style class for specificity) */
+.title-label {
+    -fx-text-fill: #F39110;
+    -fx-font-size: 65px;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
+/* Button Styles */
+.button {
+    -fx-background-color: #01758F;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #015a70;
+}
+
+.button:pressed {
+    -fx-background-color: #014a5c;
+}
+
+/* Slider Styles */
+.slider {
+    -fx-padding: 5px;
+}
+
+.slider .track {
+    -fx-background-color: #cce4e8;
+    -fx-background-radius: 3px;
+    -fx-pref-height: 6px;
+}
+
+.slider .thumb {
+    -fx-background-color: #01758F;
+    -fx-background-radius: 50%;
+    -fx-pref-height: 16px;
+    -fx-pref-width: 16px;
+    -fx-cursor: hand;
+}
+
+.slider:disabled .track {
+    -fx-background-color: #e0e0e0;
+}
+
+.slider:disabled .thumb {
+    -fx-background-color: #b0b0b0;
+}
