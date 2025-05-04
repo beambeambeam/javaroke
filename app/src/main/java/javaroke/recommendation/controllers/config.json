@@ -1,4 +1,5 @@
 {
+    "SONG_FOLDER": "src/main/resources/songs",
     "SAVE_FOLDER": "src/main/java/javaroke/recommendation/data/saves",
     "BACKUP_FOLDER": "src/main/java/javaroke/recommendation/data/backup",
     "BACKUP_AMOUNT": "20"
