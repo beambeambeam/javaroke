@@ -16,7 +16,7 @@ public class RecommendSystem {
     public static void process() {
         if (graphController == null)
             initialize();
-        process();
+        graphController.process();
     }
 
     public static void update(Queue<MyPair<String, String>> data) {

@@ -11,7 +11,7 @@ import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixPrinter;
 import javaroke.recommendation.core.utils.tranformers.SongIdTransformers;
 
 public class MainControllerTest {
-    public static void main(String[] args) {
+    public static void test() {
         // Initialize the graph controller with a specific version
         HashMapGraphController graphController = new HashMapGraphController("graph.json", "v1");
 

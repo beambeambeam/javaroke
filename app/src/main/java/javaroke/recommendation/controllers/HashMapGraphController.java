@@ -108,7 +108,7 @@ public class HashMapGraphController {
             long start = System.currentTimeMillis();
             graph = loadGraph(FLOYD_GRAPH_FILE);
             LOGGER.log(Level.INFO, "Loaded original graph successfully from: {0}",
-                    ORIGINAL_GRAPH_FILE);
+                    FLOYD_GRAPH_FILE);
 
             recommendationVertexList = version.getRecommendationsList(graph);
             tracker.recordGetRecommendList(System.currentTimeMillis() - start);
