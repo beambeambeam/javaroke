@@ -106,6 +106,10 @@ public class HashMapGraphController {
             List<String> recommendationVertexList = new ArrayList<>();
 
             long start = System.currentTimeMillis();
+            graph = loadGraph(FLOYD_GRAPH_FILE);
+            LOGGER.log(Level.INFO, "Loaded original graph successfully from: {0}",
+                    FLOYD_GRAPH_FILE);
+
             recommendationVertexList = version.getRecommendationsList(graph);
             tracker.recordGetRecommendList(System.currentTimeMillis() - start);
             LOGGER.log(Level.INFO, "Recommendations list retrieved successfully: {0} ms",
