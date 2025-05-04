@@ -21,7 +21,6 @@ public class MainController {
         // Get adjacency matrix ArrayList<String> songId;
         AdjacencyMatrixPrinter.printPopularVertex(graphController.getRecommendationsList());
 
-
         // Update weight
         graphController.updateData(getExampleQueue());
         graphController.process();
@@ -34,17 +33,26 @@ public class MainController {
         List<Item> recommendItemList = SongIdTransformers.changeSongIdToItem(recommendList);
         System.out.println(recommendItemList);
 
-        // Force making data
-        recommendList = new ArrayList<>();
-        recommendList.add(new String("jai-sung-mah"));
-        recommendList.add(new String("kloem"));
+        // Force crate exsit data
+        recommendList = getExampleSongList();
         recommendItemList = SongIdTransformers.changeSongIdToItem(recommendList);
+        printSongItemList(recommendItemList);
+
+        // Get Performance log
+        System.out.println(graphController.getMetricSummary());
+    }
+
+    public static void printSongItemList(List<Item> recommendItemList) {
         for (Item i : recommendItemList)
             System.out.println(String.format("%s, %s, %s", i.getId(), i.getTitle(), i.getArtist()));
         System.out.println();
+    }
 
-        // Get log
-        System.out.println(graphController.getMetricSummary());
+    public static List<String> getExampleSongList() {
+        List<String> recommendList = new ArrayList<>();
+        recommendList.add(new String("jai-sung-mah"));
+        recommendList.add(new String("kloem"));
+        return recommendList;
     }
 
     public static Queue<MyPair<String, String>> getExampleQueue() {
