@@ -17,6 +17,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'javazoom:jlayer:1.0.1'
     implementation libs.guava
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 }
 
 application {
@@ -35,4 +37,19 @@ tasks.named('test', Test) {
     testLogging {
         events "passed"
     }
+}
+
+// custom task to run recommendation controller for testing
+task runRec(type: JavaExec) {
+    group = "application"
+    description = "Run RecommendationController for testing"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'javaroke.recommendation.controllers.MainController'
+}
+
+task testRec(type: JavaExec) {
+    group = "application"
+    description = "Run Recommendation for testing"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'javaroke.recommendation.tests.RecommendationTest'
 }
