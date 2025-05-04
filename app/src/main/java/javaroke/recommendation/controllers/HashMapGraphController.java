@@ -4,10 +4,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
+import javaroke.recommendation.core.models.items.MyPair;
 import javaroke.recommendation.core.utils.metrics.PerformanceTracker;
 import javaroke.recommendation.core.utils.saves.HashMapGraphIO;
 import javaroke.recommendation.core.version.HashMapGraph.HashMapGraphV1;
@@ -72,6 +74,30 @@ public class HashMapGraphController {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Graph processing failed: " + e.getMessage(), e);
         }
+    }
+
+    public void updateData(Queue<MyPair<String, String>> data) {
+        try {
+            long start = System.currentTimeMillis();
+
+            graph = loadGraph(ORIGINAL_GRAPH_FILE);
+            LOGGER.log(Level.INFO, "Loaded original graph successfully from: {0}",
+                    ORIGINAL_GRAPH_FILE);
+
+            version.updateData(graph, data);
+            LOGGER.log(Level.INFO, "Updated graph with version: {0}",
+                    version.getClass().getSimpleName());
+
+            saveGraph(ORIGINAL_GRAPH_FILE);
+            LOGGER.log(Level.INFO, "Saved processed graph successfully to: {0}", FLOYD_GRAPH_FILE);
+
+            tracker.recordUpdateTime(System.currentTimeMillis() - start, data.size());
+            LOGGER.log(Level.INFO, "Recommendations list retrieved successfully: {0} ms",
+                    System.currentTimeMillis() - start);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Graph updating failed: " + e.getMessage(), e);
+        }
+
     }
 
     public List<String> getRecommendationsList() {

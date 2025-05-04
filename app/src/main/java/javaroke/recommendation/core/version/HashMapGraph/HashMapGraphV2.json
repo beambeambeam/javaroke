@@ -3,7 +3,7 @@
   "version_name": "floyd-linear",
   "description": "Using linear weight transform to calculate Floyd matrix that optimizes with previous matrix. Converts O(n^3) into reused computation.",
   "compatible_graph_version": ">=1.0.0",
-  "author": "YourName",
+  "author": "Night",
   "date_created": "2025-05-04",
   "source_code": "HashMapGraphV2.java",
   "entry_function": "process()"

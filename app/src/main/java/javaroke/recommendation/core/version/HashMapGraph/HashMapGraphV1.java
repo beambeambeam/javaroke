@@ -3,6 +3,8 @@ package javaroke.recommendation.core.version.HashMapGraph;
 import javaroke.recommendation.core.algorithms.pathFinding.FloydWallshallForHashMapGraph;
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
 import javaroke.recommendation.core.models.items.MyPair;
+import javaroke.recommendation.core.utils.GraphReading.AdjacencyListTransfer;
+import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixPrinter;
 import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmapGraph;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +27,9 @@ public class HashMapGraphV1 extends HashMapGraphVersion {
     @Override
     public void process(HashMapGraph graph) {
         WeightTransformerForHashmapGraph.invertWeights(graph);
+
+        AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
+
         WeightTransformerForHashmapGraph.applyBiasToFloor(graph, 10);
         WeightTransformerForHashmapGraph.applyExponentialTransformToWeights(graph, 2);
         FloydWallshallForHashMapGraph.floydWarshall(graph);
@@ -36,11 +41,9 @@ public class HashMapGraphV1 extends HashMapGraphVersion {
             MyPair<String, String> pair = data.poll();
             String src = pair.first;
             String dest = pair.second;
-            double weight = graph.getWeight(src, dest);
 
-            if (weight != -1) {
-                graph.addEdge(src, dest, weight);
-            }
+            graph.addEdge(src, dest, 1);
+
         }
     }
 

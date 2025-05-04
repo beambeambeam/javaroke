@@ -7,14 +7,11 @@ public class MainController {
         // Initialize the graph controller with a specific version
         HashMapGraphController graphController = new HashMapGraphController("graph.json", "v1");
 
-        System.out.println(graphController.getVersion().getVersion());
-
         AdjacencyMatrixPrinter
                 .printAdjacencyMatrix(graphController.getGraph().getAdjacencyMatrix());
 
         // Process the graph
         graphController.process();
-
 
         // Check Matrix
         AdjacencyMatrixPrinter
