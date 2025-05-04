@@ -42,10 +42,10 @@ public class Graph {
         FloydWallshallForHashMapGraph.floydWarshall(graph);
         AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
         AdjacencyMatrixPrinter.printPreviosVertexMatrix(graph.getPreviousVertexMatrix());
-        AdjacencyMatrixPrinter.printPath(
-                FloydWallshallForHashMapGraph.reconstructPathFromGraphHashMap(graph, "A", "D"));
-        AdjacencyMatrixPrinter.printPath(
-                FloydWallshallForHashMapGraph.reconstructPathFromGraphHashMap(graph, "E", "C"));
+        AdjacencyMatrixPrinter
+                .printPath(FloydWallshallForHashMapGraph.reconstructPath(graph, "A", "D"));
+        AdjacencyMatrixPrinter
+                .printPath(FloydWallshallForHashMapGraph.reconstructPath(graph, "E", "C"));
 
         ;
         WeightTransformerForHashmapGraph.invertWeights(graph);

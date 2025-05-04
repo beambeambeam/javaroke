@@ -10,11 +10,13 @@ public class MainController {
         // Process the graph
         graphController.process();
 
+        // graphController.
+
         // Check Matrix
         AdjacencyMatrixPrinter
                 .printAdjacencyMatrix(graphController.getGraph().getAdjacencyMatrix());
         AdjacencyMatrixPrinter
                 .printPreviosVertexMatrix(graphController.getGraph().getPreviousVertexMatrix());
-
+        AdjacencyMatrixPrinter.printPopularVertex(graphController.getRecommendationsList());
     }
 }

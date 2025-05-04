@@ -1,7 +1,10 @@
 package javaroke.recommendation.core.models.graphs;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javaroke.recommendation.core.models.items.MyPair;
 
 public class HashMapGraph implements Graph {
     // Use to keep track of the previous vertex in the shortest path algorithm
@@ -39,6 +42,7 @@ public class HashMapGraph implements Graph {
     // But we don't keep those null path in HashMap, we keep it as a null
     // Then we call it, we will return the floor weight
     // Making the graph more efficient in those calculation and memory terms
+    public MyPair<String, String> maximumWeightPosition;
     public double maximumWeight;
     public double floorWeight;
 
@@ -47,6 +51,7 @@ public class HashMapGraph implements Graph {
         this.adjacencyList = new HashMap<>();
         this.keyList = new ArrayList<>();
         this.size = 0;
+        this.maximumWeightPosition = new MyPair<>(null, null);
         this.maximumWeight = 0.0;
         this.floorWeight = -1.0;
     }
@@ -74,6 +79,7 @@ public class HashMapGraph implements Graph {
         double newWeight = adjacencyList.get(src).getOrDefault(dest, 0.0) + weight;
 
         if (newWeight > maximumWeight) {
+            this.maximumWeightPosition = new MyPair<>(src, dest);
             maximumWeight = newWeight;
         }
 
@@ -83,12 +89,17 @@ public class HashMapGraph implements Graph {
 
     @Override
     public double getWeight(String src, String dest) {
+        if (!adjacencyList.containsKey(src) || !adjacencyList.containsKey(dest)) {
+            return floorWeight;
+        }
+
         return adjacencyList.get(src).getOrDefault(dest, floorWeight);
     }
 
     @Override
     public void setWeight(String src, String dest, double value) {
         if (value > maximumWeight) {
+            this.maximumWeightPosition = new MyPair<>(src, dest);
             maximumWeight = value;
 
         }
@@ -108,6 +119,22 @@ public class HashMapGraph implements Graph {
     public void removeEdge(String src, String dest, double weight) {
         if (adjacencyList.containsKey(src) && adjacencyList.get(src).containsKey(dest)) {
             adjacencyList.get(src).remove(dest);
+        }
+    }
+
+    @Override
+    public void updateMaximumWeightPosition() {
+        maximumWeight = 0.0;
+        for (String src : keyList) {
+            for (String dest : keyList) {
+                double weight = adjacencyList.get(src).getOrDefault(dest, floorWeight);
+                if (weight > maximumWeight) {
+                    System.out.println(
+                            "updateMaximumWeightPosition: " + src + " " + dest + " " + weight);
+                    maximumWeight = weight;
+                    maximumWeightPosition = new MyPair<>(src, dest);
+                }
+            }
         }
     }
 
@@ -153,6 +180,8 @@ public class HashMapGraph implements Graph {
         // Copy scalar fields
         cloned.size = this.size;
         cloned.maximumWeight = this.maximumWeight;
+        cloned.maximumWeightPosition =
+                new MyPair<>(this.maximumWeightPosition.first, this.maximumWeightPosition.second);
         cloned.floorWeight = this.floorWeight;
 
         // Deep copy keyList

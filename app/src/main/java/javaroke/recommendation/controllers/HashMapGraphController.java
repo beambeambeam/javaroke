@@ -2,6 +2,8 @@ package javaroke.recommendation.controllers;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +43,7 @@ public class HashMapGraphController {
             LOGGER.log(Level.INFO, "Loaded version successfully: {0}", version);
 
             saveGraph(ORIGINAL_GRAPH_FILE);
-            LOGGER.log(Level.INFO, "Saved graph to: {0}", ORIGINAL_GRAPH_FILE);
+            LOGGER.log(Level.INFO, "Saved graph successfully to: {0}", ORIGINAL_GRAPH_FILE);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Initialization failed: " + e.getMessage(), e);
         }
@@ -71,6 +73,24 @@ public class HashMapGraphController {
         }
     }
 
+    public List<String> getRecommendationsList() {
+        try {
+            List<String> recommendationVertexList = new ArrayList<>();
+
+            long start = System.currentTimeMillis();
+            recommendationVertexList = version.getRecommendationsList(graph);
+            LOGGER.log(Level.INFO, "Recommendations list retrieved successfully: {0} ms",
+                    System.currentTimeMillis() - start);
+
+            return recommendationVertexList;
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to get recommendations list: " + e.getMessage(), e);
+            return new ArrayList<>();
+        }
+    }
+
+
+
     private void saveGraph(String fileName) throws Exception {
         long start = System.currentTimeMillis();
         if (isNullOrEmpty(fileName)) {
@@ -94,7 +114,12 @@ public class HashMapGraphController {
         }
 
         HashMapGraph graph = HashMapGraphIO.loadGraph(path);
+
+        if (graph.maximumWeightPosition.first == null) {
+            graph.updateMaximumWeightPosition();
+        }
         tracker.recordLoadTime(System.currentTimeMillis() - start);
+
         return graph;
     }
 

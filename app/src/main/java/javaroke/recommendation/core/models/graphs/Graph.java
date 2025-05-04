@@ -54,4 +54,6 @@ public interface Graph {
      * @param weight The weight of the edge to be removed.
      */
     void removeEdge(String src, String dest, double weight);
+
+    void updateMaximumWeightPosition();
 }

@@ -24,8 +24,16 @@ public class AdjacencyMatrixPrinter {
         System.out.println();
     }
 
+    public static void printPopularVertex(List<String> popularVertex) {
+        System.out.print("Popular Vertex: ");
+        for (String vertex : popularVertex) {
+            System.out.print(vertex + " ");
+        }
+        System.out.println();
+    }
+
     public static void printPath(List<String> path) {
-        System.out.print(path.get(0) + " -> " + path.get(path.size() - 1) + ": ");
+        System.out.print(path.get(0) + "->" + path.get(path.size() - 1) + ": ");
         for (String node : path) {
             System.out.print(node + " ");
         }

@@ -1,8 +1,9 @@
 package javaroke.recommendation.core.version.HashMapGraph;
 
+import java.util.List;
 import java.util.Queue;
-import javafx.util.Pair;
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
+import javaroke.recommendation.core.models.items.MyPair;
 
 public abstract class HashMapGraphVersion {
     public String getVersion() {
@@ -19,11 +20,12 @@ public abstract class HashMapGraphVersion {
 
     public abstract void process(HashMapGraph graph);
 
-    public abstract void updateData(HashMapGraph graph, Queue<Pair<String, String>> data);
+    public abstract void updateData(HashMapGraph graph, Queue<MyPair<String, String>> data);
 
-    public abstract void getRecommendationsList();
+    public abstract List<String> getRecommendationsList(HashMapGraph graph);
 
-    public abstract void getRecommendationsList(String src, String dest);
+    public abstract List<String> getRecommendationsList(HashMapGraph graph, String src,
+            String dest);
 
     public abstract String getVersionInfo(String id);
 }
