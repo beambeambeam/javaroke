@@ -11,6 +11,7 @@ import javaroke.recommendation.core.models.graphs.HashMapGraph;
 import javaroke.recommendation.core.utils.metrics.PerformanceTracker;
 import javaroke.recommendation.core.utils.saves.HashMapGraphIO;
 import javaroke.recommendation.core.version.HashMapGraph.HashMapGraphV1;
+import javaroke.recommendation.core.version.HashMapGraph.HashMapGraphV2;
 import javaroke.recommendation.core.version.HashMapGraph.HashMapGraphVersion;
 
 public class HashMapGraphController {
@@ -132,6 +133,10 @@ public class HashMapGraphController {
         switch (version.toLowerCase()) {
             case "v1":
                 return new HashMapGraphV1();
+            case "v2":
+                return new HashMapGraphV2() {
+
+                };
             default:
                 throw new IllegalArgumentException("Unsupported version: " + version);
         }

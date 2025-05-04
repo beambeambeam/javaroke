@@ -7,16 +7,22 @@ public class MainController {
         // Initialize the graph controller with a specific version
         HashMapGraphController graphController = new HashMapGraphController("graph.json", "v1");
 
+        System.out.println(graphController.getVersion().getVersion());
+
+        AdjacencyMatrixPrinter
+                .printAdjacencyMatrix(graphController.getGraph().getAdjacencyMatrix());
+
         // Process the graph
         graphController.process();
 
-        // graphController.
 
         // Check Matrix
         AdjacencyMatrixPrinter
                 .printAdjacencyMatrix(graphController.getGraph().getAdjacencyMatrix());
         AdjacencyMatrixPrinter
                 .printPreviosVertexMatrix(graphController.getGraph().getPreviousVertexMatrix());
+
+        // Get adjacency matrix ArrayList<String> songId;
         AdjacencyMatrixPrinter.printPopularVertex(graphController.getRecommendationsList());
     }
 }

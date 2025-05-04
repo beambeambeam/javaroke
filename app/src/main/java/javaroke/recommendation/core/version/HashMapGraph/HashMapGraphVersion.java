@@ -4,19 +4,30 @@ import java.util.List;
 import java.util.Queue;
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
 import javaroke.recommendation.core.models.items.MyPair;
+import javaroke.recommendation.core.version.VersionConfigLoader;
 
 public abstract class HashMapGraphVersion {
+    protected VersionConfigLoader versionConfigLoader;
+
+    public HashMapGraphVersion(String configPath) {
+        versionConfigLoader = new VersionConfigLoader(configPath);
+    }
+
     public String getVersion() {
         return getVersionInfo("version");
     }
 
     public String getVersionName() {
-        return getVersionInfo("versionName");
+        return getVersionInfo("version-name");
     }
 
     public String getDescription() {
         return getVersionInfo("description");
     }
+
+    public String getVersionInfo(String id) {
+        return versionConfigLoader.get(id);
+    };
 
     public abstract void process(HashMapGraph graph);
 
@@ -26,6 +37,4 @@ public abstract class HashMapGraphVersion {
 
     public abstract List<String> getRecommendationsList(HashMapGraph graph, String src,
             String dest);
-
-    public abstract String getVersionInfo(String id);
 }

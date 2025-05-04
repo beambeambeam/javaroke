@@ -3,7 +3,6 @@ package javaroke.recommendation.core.version.HashMapGraph;
 import javaroke.recommendation.core.algorithms.pathFinding.FloydWallshallForHashMapGraph;
 import javaroke.recommendation.core.models.graphs.HashMapGraph;
 import javaroke.recommendation.core.models.items.MyPair;
-import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixPrinter;
 import javaroke.recommendation.core.utils.tranformers.WeightTransformerForHashmapGraph;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +11,17 @@ import java.util.Map;
 import java.util.Queue;
 
 public class HashMapGraphV1 extends HashMapGraphVersion {
+    private static final String configPath =
+            "src/main/java/javaroke/recommendation/core/version/HashMapGraph/HashMapGraphV1.json";
+
+    public HashMapGraphV1() {
+        super(configPath);
+    }
+
+    public HashMapGraphV1(String path) {
+        super(path);
+    }
+
     @Override
     public void process(HashMapGraph graph) {
         WeightTransformerForHashmapGraph.invertWeights(graph);
@@ -84,11 +94,4 @@ public class HashMapGraphV1 extends HashMapGraphVersion {
     public List<String> getRecommendationsList(HashMapGraph graph, String src, String dest) {
         return FloydWallshallForHashMapGraph.reconstructPath(graph, src, dest);
     }
-
-    @Override
-    public String getVersionInfo(String id) {
-        // Call from JSON
-        return "";
-    }
-
 }

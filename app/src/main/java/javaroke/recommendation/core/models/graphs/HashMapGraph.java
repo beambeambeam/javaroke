@@ -129,8 +129,6 @@ public class HashMapGraph implements Graph {
             for (String dest : keyList) {
                 double weight = adjacencyList.get(src).getOrDefault(dest, floorWeight);
                 if (weight > maximumWeight) {
-                    System.out.println(
-                            "updateMaximumWeightPosition: " + src + " " + dest + " " + weight);
                     maximumWeight = weight;
                     maximumWeightPosition = new MyPair<>(src, dest);
                 }
