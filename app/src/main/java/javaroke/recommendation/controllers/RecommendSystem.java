@@ -6,7 +6,7 @@ import javaroke.gui.search.Item;
 import javaroke.recommendation.core.models.items.MyPair;
 import javaroke.recommendation.core.utils.tranformers.SongIdTransformers;
 
-public class ReccommendSystem {
+public class RecommendSystem {
     private static HashMapGraphController graphController = null;
 
     public static void initialize() {
