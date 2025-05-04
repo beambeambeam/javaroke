@@ -63,3 +63,37 @@
 .slider:disabled .thumb {
     -fx-background-color: #b0b0b0;
 }
+
+/* Play Page Specific Styles */
+.queue-label,
+.history-label {
+    -fx-font-size: 24px; /* Increased font size */
+}
+
+#lyricLabel {
+    -fx-text-fill: #F39110; /* Orange color */
+    -fx-font-size: 48px; /* Increased font size */
+    /* Apply floating animation */
+    -fx-animation: float 3s ease-in-out infinite;
+    -fx-stroke: #000000; /* Stroke color */
+    -fx-stroke-width: 2px; /* Stroke width */
+}
+
+/* Define the floating animation */
+@keyframes float {
+    0% {
+        -fx-translate-y: 0px;
+    }
+    50% {
+        -fx-translate-y: -10px; /* Move up */
+    }
+    100% {
+        -fx-translate-y: 0px;
+    }
+}
+
+/* Style for the song image view */
+#songImageView {
+    -fx-fit-height: 500px;
+    -fx-fit-width: 500px;
+}
