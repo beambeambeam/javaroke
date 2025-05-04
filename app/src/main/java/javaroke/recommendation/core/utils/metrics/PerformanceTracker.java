@@ -17,7 +17,7 @@ public class PerformanceTracker {
     private final Map<MetricType, List<MetricEntry>> metrics;
 
     public enum MetricType {
-        LOAD, UPDATE, PROCESS, GET_RECCOMMEND
+        LOAD, UPDATE, PROCESS, GET_RECOMMEND
     }
 
     public PerformanceTracker(String versionName) {
@@ -44,8 +44,8 @@ public class PerformanceTracker {
         LOGGER.fine("Recorded process time: " + timeMs + "ms");
     }
 
-    public void recordGetReccommendList(long timeMs) {
-        metrics.get(MetricType.GET_RECCOMMEND).add(new MetricEntry(timeMs, 1));
+    public void recordGetRecommendList(long timeMs) {
+        metrics.get(MetricType.GET_RECOMMEND).add(new MetricEntry(timeMs, 1));
         LOGGER.fine("Recorded get recomend list time: " + timeMs + "ms ");
     }
 
@@ -84,7 +84,7 @@ public class PerformanceTracker {
             typeStats.put("minTimeMs", timeStats.getMin());
             typeStats.put("maxTimeMs", timeStats.getMax());
 
-            if (type == MetricType.UPDATE || type == MetricType.GET_RECCOMMEND) {
+            if (type == MetricType.UPDATE || type == MetricType.GET_RECOMMEND) {
                 typeStats.put("totalItems", countStats.getSum());
                 typeStats.put("avgItems", countStats.getAverage());
 

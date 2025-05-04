@@ -41,7 +41,7 @@ public class Graph {
         // AdjacencyMatrixUtils.printAdjacencyMatrix(graph.getAdjacencyMetrix());
         FloydWallshallForHashMapGraph.floydWarshall(graph);
         AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
-        AdjacencyMatrixPrinter.printPreviosVertexMatrix(graph.getPreviousVertexMatrix());
+        AdjacencyMatrixPrinter.printPreviousVertexMatrix(graph.getPreviousVertexMatrix());
         AdjacencyMatrixPrinter
                 .printPath(FloydWallshallForHashMapGraph.reconstructPath(graph, "A", "D"));
         AdjacencyMatrixPrinter
@@ -56,7 +56,7 @@ public class Graph {
         WeightTransformerForHashmapGraph.applyMultiplicativeTransformToWeights(graph, 0.5);
         FloydWallshallForHashMapGraph.floydWarshall(graph);
         AdjacencyMatrixPrinter.printAdjacencyMatrix(graph.getAdjacencyMatrix());
-        AdjacencyMatrixPrinter.printPreviosVertexMatrix(graph.getPreviousVertexMatrix());
+        AdjacencyMatrixPrinter.printPreviousVertexMatrix(graph.getPreviousVertexMatrix());
 
     }
 

@@ -22,11 +22,11 @@ public class HashMapGraph implements Graph {
     // The key list is an ArrayList where keyList.get(i)
     // mean the vertex name at index i (O(1) to get the vertex name)
 
-    // Princitple:
+    // Principle:
     // ArrayList will read all data fast than Hashmap (O(n) to get all vertex name)
     // Cause ArrayList is using index, and it's so fast to call from i=1 to i=size
     // HashMap is using big memory space to store the data.
-    // And to find all, It's require seach in every space.
+    // And to find all, It's require search in every space.
     // The space size is 2^(log2(ceil(0.75*size)) with possible null on those space.
     // But ArrayList size is (size), no null space.
     // And we can use this ArrayList based to select data to calculate or do anything.
@@ -38,7 +38,7 @@ public class HashMapGraph implements Graph {
 
     // The maximum weight of the graph
     // The floor weight for no path between two vertices
-    // reccomendation system still want to make all the vertices connected
+    // recommendation system still want to make all the vertices connected
     // But we don't keep those null path in HashMap, we keep it as a null
     // Then we call it, we will return the floor weight
     // Making the graph more efficient in those calculation and memory terms

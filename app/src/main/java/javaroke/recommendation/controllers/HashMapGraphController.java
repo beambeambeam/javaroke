@@ -107,6 +107,7 @@ public class HashMapGraphController {
 
             long start = System.currentTimeMillis();
             recommendationVertexList = version.getRecommendationsList(graph);
+            tracker.recordGetRecommendList(System.currentTimeMillis() - start);
             LOGGER.log(Level.INFO, "Recommendations list retrieved successfully: {0} ms",
                     System.currentTimeMillis() - start);
 
