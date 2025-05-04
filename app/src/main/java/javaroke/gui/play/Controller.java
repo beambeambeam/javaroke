@@ -10,13 +10,18 @@ import javaroke.gui.DataSingleton;
 import javaroke.gui.SceneController;
 import javaroke.models.NodeSong;
 import javaroke.songq.SongQueue;
+import javaroke.stack.StackSong;
 
 public class Controller extends SceneController implements Initializable {
   DataSingleton data = DataSingleton.getInstance();
   SongQueue storageSongQueue = data.getSongQueue();
+  StackSong historyStack = data.getSongHistoryStack();
 
   @FXML
   private ListView<String> queueList;
+
+  @FXML
+  private ListView<String> historyList;
 
   @FXML
   private Label songName;
@@ -27,6 +32,11 @@ public class Controller extends SceneController implements Initializable {
   @FXML
   private void handleNextSong() {
     if (storageSongQueue.hasNext()) {
+      NodeSong currentSong = storageSongQueue.getCurrentSong(); // Get song before dequeuing
+      if (currentSong != null) {
+        historyStack.push(currentSong);
+        historyList.getItems().add(0, currentSong.getTitle() + " " + currentSong.getArtist()); // Add to top of history list
+      }
       storageSongQueue.dequeueSong();
       queueList.getItems().remove(0);
     }
@@ -60,5 +70,10 @@ public class Controller extends SceneController implements Initializable {
 
     queueList.getItems().addAll(storageSongQueue.getAllSongs().stream()
         .map(song -> song.getTitle() + " " + song.getArtist()).toList());
+
+    // Populate history list on initialization
+    for (NodeSong song : historyStack) {
+      historyList.getItems().add(song.getTitle() + " " + song.getArtist());
+    }
   }
 }
