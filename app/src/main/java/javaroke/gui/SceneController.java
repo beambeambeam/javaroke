@@ -27,6 +27,8 @@ public class SceneController {
     Parent root = FXMLLoader.load(getClass().getResource("/search.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
+    // Apply the CSS stylesheet
+    scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
     stage.setScene(scene);
     stage.show();
   }
@@ -35,6 +37,8 @@ public class SceneController {
     Parent root = FXMLLoader.load(getClass().getResource("/play.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
+    // Apply the CSS stylesheet
+    scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
     stage.setScene(scene);
     stage.show();
   }
