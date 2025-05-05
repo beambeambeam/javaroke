@@ -1,5 +1,6 @@
 package javaroke.gui.play;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -52,6 +53,8 @@ public class Controller extends SceneController implements Initializable {
   private Label totalDurationLabel;
   @FXML // Added FXML variable for play/pause button
   private Button playPauseButton;
+  @FXML // Added FXML variable for play/pause button
+  private Button goBackButton;
 
   // Service instance
   private MediaPlayerService mediaPlayerService = new MediaPlayerService();
@@ -96,6 +99,8 @@ public class Controller extends SceneController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    System.out.println(storageSongQueue.getAllSongs());
+
     // Bind lyric label
     lyricLabel.textProperty().bind(mediaPlayerService.currentLyricProperty());
 
@@ -229,5 +234,14 @@ public class Controller extends SceneController implements Initializable {
     }
 
     mediaPlayerService.playSong(storageSongQueue.getCurrentSong());
+
+    goBackButton.setOnAction(event -> {
+      mediaPlayerService.stop();
+      try {
+        switchToScene2(event);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 }

@@ -13,9 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane styleClass="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0"
-  xmlns="http://javafx.com/javafx/23.0.1"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.play.Controller">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.play.Controller">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="318.1011047363281" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="481.8988952636719" />
@@ -27,7 +25,7 @@
   <children>
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="12.0">
       <children>
-        <Label text="Queue" styleClass="queue-label">
+        <Label styleClass="queue-label" text="Queue">
           <font>
             <Font size="19.0" />
           </font>
@@ -39,10 +37,11 @@
         </ListView>
         <HBox alignment="CENTER" spacing="14.0">
           <children>
-            <Button fx:id="prevButton" styleClass="button" mnemonicParsing="false" onAction="#handlePrevSong" text="Prev" />
-            <Button fx:id="nextButton" styleClass="button" mnemonicParsing="false" onAction="#handleNextSong" text="Next" />
+            <Button fx:id="prevButton" mnemonicParsing="false" onAction="#handlePrevSong" styleClass="button" text="Prev" />
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#handleNextSong" styleClass="button" text="Next" />
           </children>
         </HBox>
+            <Button fx:id="goBackButton" mnemonicParsing="false" text="Go back" />
       </children>
     </VBox>
     <GridPane GridPane.columnIndex="1">
@@ -57,7 +56,7 @@
       <children>
         <VBox alignment="CENTER" spacing="10.0" GridPane.rowIndex="1">
           <children>
-            <ImageView fx:id="songImageView" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" visible="false" managed="false" />
+            <ImageView fx:id="songImageView" fitHeight="200.0" fitWidth="300.0" managed="false" pickOnBounds="true" preserveRatio="true" visible="false" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
               <children>
                 <Label fx:id="lyricLabel" text="..." textAlignment="CENTER">
@@ -115,7 +114,7 @@
     </GridPane>
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="12.0" GridPane.columnIndex="2">
       <children>
-        <Label text="History" styleClass="history-label">
+        <Label styleClass="history-label" text="History">
           <font>
             <Font size="19.0" />
           </font>

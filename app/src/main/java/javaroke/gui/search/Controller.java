@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javaroke.gui.DataSingleton;
 import javaroke.gui.SceneController;
+import javaroke.models.NodeSong;
 import javaroke.songq.SongQueue;
 import java.util.ArrayList;
 
@@ -31,7 +32,14 @@ public class Controller extends SceneController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     Item.loadItemsFromFolder("src/main/resources/songs", items);
 
+    for (NodeSong item : storageSongQueue.getAllSongs()) {
+      queueList.getItems().add(item.getTitle() + " " + item.getArtist());
+    }
+
     for (Item item : items) {
+      if (queueList.getItems().contains(item.getTitle() + " " + item.getArtist())) {
+        continue;
+      }
       songList.getItems().add(item.getTitle() + " " + item.getArtist());
     }
 
@@ -63,6 +71,7 @@ public class Controller extends SceneController implements Initializable {
         });
 
     karaokeButton.setOnAction(event -> {
+      storageSongQueue.clearAll();
       for (String queuedSong : queueList.getItems()) {
         for (Item item : items) {
           if ((item.getTitle() + " " + item.getArtist()).equals(queuedSong)) {
