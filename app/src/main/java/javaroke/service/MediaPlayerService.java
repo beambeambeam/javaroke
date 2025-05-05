@@ -261,4 +261,22 @@ public class MediaPlayerService {
       Platform.runLater(() -> currentLyricProperty.set("Lyrics not found."));
     }
   }
+
+  public double getCurrentVolume() {
+    if (mediaPlayer != null) {
+      return mediaPlayer.getVolume();
+    }
+    return 0.0;
+  }
+
+  public void setVolume(double volume) {
+    if (mediaPlayer != null) {
+      if (volume < 0.0) {
+        volume = 0.0;
+      } else if (volume > 1.0) {
+        volume = 1.0;
+      }
+      mediaPlayer.setVolume(volume);
+    }
+  }
 }

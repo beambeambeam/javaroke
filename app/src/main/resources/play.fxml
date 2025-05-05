@@ -124,6 +124,17 @@
             <Insets left="10.0" right="10.0" />
           </VBox.margin>
         </ListView>
+            <VBox>
+               <children>
+                  <HBox spacing="12.0">
+                     <children>
+                        <Label text="Volumns" />
+                        <Label fx:id="volumnPercentage" text="0%" />
+                     </children>
+                  </HBox>
+                  <Slider fx:id="volumnSlider" />
+               </children>
+            </VBox>
       </children>
     </VBox>
   </children>

@@ -96,6 +96,11 @@ public class Controller extends SceneController implements Initializable {
     mediaPlayerService.togglePlayPause();
   }
 
+  @FXML
+  private Slider volumnSlider;
+
+  @FXML
+  private Label volumnPercentage;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -243,5 +248,18 @@ public class Controller extends SceneController implements Initializable {
         e.printStackTrace();
       }
     });
+
+    initializeVolumeSettings();
+  }
+
+  private void initializeVolumeSettings() {
+    volumnSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+      mediaPlayerService.setVolume(newVal.doubleValue() / 100.0);
+      volumnPercentage.setText(String.format("%.0f%%", newVal.doubleValue()));
+    });
+
+    double initialVolume = mediaPlayerService.getCurrentVolume() * 100.0;
+    volumnSlider.setValue(initialVolume);
+    volumnPercentage.setText(String.format("%.0f%%", initialVolume));
   }
 }
