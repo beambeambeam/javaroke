@@ -10,44 +10,44 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VersionConfigLoader {
-    private static final Logger LOGGER = Logger.getLogger(VersionConfigLoader.class.getName());
-    private String CONFIG_PATH;
-    private Map<String, String> configMap;
+  private static final Logger LOGGER = Logger.getLogger(VersionConfigLoader.class.getName());
+  private String CONFIG_PATH;
+  private Map<String, String> configMap;
 
-    public VersionConfigLoader(String path) {
-        this.CONFIG_PATH = path;
-        this.configMap = loadConfig();
+  public VersionConfigLoader(String path) {
+    this.CONFIG_PATH = path;
+    this.configMap = loadConfig();
+  }
+
+  public String get(String key) {
+    if (configMap == null) {
+      configMap = loadConfig();
     }
 
-    public String get(String key) {
-        if (configMap == null) {
-            configMap = loadConfig();
-        }
+    return configMap.get(key);
+  }
 
-        return configMap.get(key);
+  public void updateConfig() {
+    configMap = loadConfig();
+  }
+
+  public Map<String, String> loadConfig() {
+    try {
+      Map<String, String> configMap = new HashMap<>();
+      ObjectMapper mapper = new ObjectMapper();
+
+      if (!Files.exists(Paths.get(CONFIG_PATH))) {
+        throw new IllegalArgumentException("Config file not found: " + Paths.get(CONFIG_PATH));
+      }
+
+      configMap = mapper.readValue(new File(CONFIG_PATH),
+          new com.fasterxml.jackson.core.type.TypeReference<Map<String, String>>() {});
+
+      LOGGER.log(Level.INFO, "Version config loaded successfully: {0}", CONFIG_PATH);
+      return configMap;
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, "Failed to load config: " + e.getMessage());
+      return new HashMap<>();
     }
-
-    public void updateConfig() {
-        configMap = loadConfig();
-    }
-
-    public Map<String, String> loadConfig() {
-        try {
-            Map<String, String> configMap = new HashMap<>();
-            ObjectMapper mapper = new ObjectMapper();
-
-            if (!Files.exists(Paths.get(CONFIG_PATH))) {
-                throw new IllegalArgumentException(
-                        "Config file not found: " + Paths.get(CONFIG_PATH));
-            }
-
-            configMap = mapper.readValue(new File(CONFIG_PATH), Map.class);
-
-            LOGGER.log(Level.INFO, "Version config loaded successfully: {0}", CONFIG_PATH);
-            return configMap;
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Failed to load config: " + e.getMessage());
-            return new HashMap<>();
-        }
-    }
+  }
 }
