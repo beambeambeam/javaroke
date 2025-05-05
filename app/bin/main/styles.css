@@ -63,3 +63,22 @@
 .slider:disabled .thumb {
     -fx-background-color: #b0b0b0;
 }
+
+/* Play Page Specific Styles */
+.queue-label,
+.history-label {
+    -fx-font-size: 24px; /* Increased font size */
+}
+
+#lyricLabel {
+    -fx-text-fill: #F39110; /* Orange color */
+    -fx-font-size: 48px; /* Increased font size */
+    -fx-stroke: #000000; /* Stroke color */
+    -fx-stroke-width: 2px; /* Stroke width */
+}
+
+/* Style for the song image view */
+#songImageView {
+    -fx-fit-height: 500px;
+    -fx-fit-width: 500px;
+}

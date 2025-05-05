@@ -50,23 +50,35 @@ public class Item {
       return;
     }
 
-    try (DirectoryStream<Path> stream = Files.newDirectoryStream(folder, "*.{json,JSON}")) {
-      for (Path file : stream) {
-        try (
-            JsonReader jr = new JsonReader(Files.newBufferedReader(file, StandardCharsets.UTF_8))) {
-          JsonObject jsonObject = JsonParser.parseReader(jr).getAsJsonObject();
-          String title =
-              jsonObject.has("title") ? jsonObject.get("title").getAsString() : "Unknown Title";
-          String artist =
-              jsonObject.has("artist") ? jsonObject.get("artist").getAsString() : "Unknown Artist";
-          String id = jsonObject.has("id") ? jsonObject.get("id").getAsString() : "Unknown id";
-          items.add(new Item(id, title, artist));
+    // Iterate through subdirectories in the main songs folder
+    try (DirectoryStream<Path> subDirStream = Files.newDirectoryStream(folder, Files::isDirectory)) {
+      for (Path subDir : subDirStream) {
+        // Look for JSON files within each subdirectory
+        try (DirectoryStream<Path> fileStream = Files.newDirectoryStream(subDir, "*.{json,JSON}")) {
+          for (Path file : fileStream) {
+            try (JsonReader jr =
+                new JsonReader(Files.newBufferedReader(file, StandardCharsets.UTF_8))) {
+              JsonObject jsonObject = JsonParser.parseReader(jr).getAsJsonObject();
+              String title =
+                  jsonObject.has("title") ? jsonObject.get("title").getAsString() : "Unknown Title";
+              String artist =
+                  jsonObject.has("artist")
+                      ? jsonObject.get("artist").getAsString()
+                      : "Unknown Artist";
+              // Use the folder name as the ID, assuming it's unique
+              String id = subDir.getFileName().toString(); 
+              items.add(new Item(id, title, artist));
+            } catch (Exception ex) {
+              System.err.println(
+                  "Error reading file: " + file.getFileName() + " - " + ex.getMessage());
+            }
+          }
         } catch (Exception ex) {
-          System.err.println("Error reading file: " + file.getFileName() + " - " + ex.getMessage());
+          System.err.println("Error accessing subdirectory: " + subDir.getFileName() + " - " + ex.getMessage());
         }
       }
     } catch (Exception ex) {
-      System.err.println("Error accessing folder: " + ex.getMessage());
+      System.err.println("Error accessing main songs folder: " + ex.getMessage());
     }
   }
 }
