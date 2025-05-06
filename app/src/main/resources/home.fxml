@@ -5,9 +5,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="24.0" styleClass="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.home.Controller">
+<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="24.0" styleClass="root"
+  xmlns="http://javafx.com/javafx/23.0.1"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.home.Controller">
   <children>
     <Label styleClass="title-label" text="JAVAROKE!" />
-    <Button mnemonicParsing="false" onAction="#switchToScene2" text="Let's sign a song" />
+    <Button mnemonicParsing="false" onAction="#switchToScene2" text="Let's sing a song" />
   </children>
 </VBox>

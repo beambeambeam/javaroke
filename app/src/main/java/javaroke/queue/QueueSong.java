@@ -1,6 +1,5 @@
 package javaroke.queue;
 
-import java.util.List;
 import javaroke.models.NodeSong;
 
 public class QueueSong extends QueueAbstract<NodeSong> {
@@ -19,40 +18,10 @@ public class QueueSong extends QueueAbstract<NodeSong> {
     enqueueAtFront(new NodeSong(songId, title, artist, duration));
   }
 
-  // ------- Other Song function here... -------
-
-
-  public int totalDuration() {
-    return 0;
+  // Clear all songs in the queue
+  public void clearAllSong() {
+    while (!isEmpty()) {
+      dequeue();
+    }
   }
-
-  // Return the briefly summary of this list
-  // May be "3 songs, 10 min total."
-  public String getPlaylistSummary() {
-    return null;
-  }
-
-  // Return List that carry all song name
-  public List<String> getTitleList() {
-    return null;
-  }
-
-  // Return List that carry all song artist
-  public List<String> getArtistList() {
-    return null;
-  }
-
-  // Skip the song on queue untill find song name $songTitle
-  // Return as new QueueSong that carry those skip song
-  // Change Queue by dequeue data that not match out
-  public QueueSong skipTo(String songTitle) {
-    return null;
-  }
-
-  // Enqueue $otherQueueu to this Queue
-  public void mergeWith(QueueSong otherQueue) {
-
-  }
-
-  // Other more...
 }

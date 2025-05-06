@@ -107,4 +107,9 @@ public class SongQueue {
   public boolean hasPrev() {
     return !history.isEmpty();
   }
+
+  public void clearAll() {
+    queue.clearAllSong();
+    history.clearAllSong();
+  }
 }

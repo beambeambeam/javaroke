@@ -1,6 +1,6 @@
 package javaroke.gui.play;
 
-import java.io.File; // Added import
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -20,6 +20,7 @@ import javaroke.models.NodeSong;
 import javaroke.service.MediaPlayerService;
 import javaroke.songq.SongQueue;
 import javaroke.stack.StackSong;
+import javaroke.utils.Formatter;
 
 public class Controller extends SceneController implements Initializable {
   DataSingleton data = DataSingleton.getInstance();
@@ -52,6 +53,8 @@ public class Controller extends SceneController implements Initializable {
   private Label totalDurationLabel;
   @FXML // Added FXML variable for play/pause button
   private Button playPauseButton;
+  @FXML // Added FXML variable for play/pause button
+  private Button goBackButton;
 
   // Service instance
   private MediaPlayerService mediaPlayerService = new MediaPlayerService();
@@ -63,7 +66,7 @@ public class Controller extends SceneController implements Initializable {
       NodeSong currentSong = storageSongQueue.getCurrentSong(); // Get song before dequeuing
       if (currentSong != null) {
         historyStack.push(currentSong);
-        historyList.getItems().add(0, currentSong.getTitle() + " " + currentSong.getArtist()); // Add to top of history list
+        historyList.getItems().add(0, currentSong.getTitle() + " " + currentSong.getArtist());
       }
       storageSongQueue.dequeueSong();
       queueList.getItems().remove(0);
@@ -80,6 +83,9 @@ public class Controller extends SceneController implements Initializable {
     if (storageSongQueue.hasPrev()) {
       NodeSong prevSong = storageSongQueue.rewindToPreviousSong();
       queueList.getItems().add(0, prevSong.getTitle() + " " + prevSong.getArtist());
+      if (!historyList.getItems().isEmpty()) {
+        historyList.getItems().remove(0);
+      }
       // Tell the service to play the song we rewound to
       mediaPlayerService.playSong(prevSong);
     } // Added missing closing brace
@@ -90,19 +96,16 @@ public class Controller extends SceneController implements Initializable {
     mediaPlayerService.togglePlayPause();
   }
 
-  // Helper method to format Duration to MM:SS
-  private String formatDuration(Duration duration) {
-    if (duration == null || duration.isUnknown() || duration.isIndefinite()) {
-      return "00:00";
-    }
-    long totalSeconds = (long) duration.toSeconds();
-    long minutes = totalSeconds / 60;
-    long seconds = totalSeconds % 60;
-    return String.format("%02d:%02d", minutes, seconds);
-  }
+  @FXML
+  private Slider volumnSlider;
+
+  @FXML
+  private Label volumnPercentage;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    System.out.println(storageSongQueue.getAllSongs());
+
     // Bind lyric label
     lyricLabel.textProperty().bind(mediaPlayerService.currentLyricProperty());
 
@@ -124,14 +127,16 @@ public class Controller extends SceneController implements Initializable {
             songImageView.setVisible(true);
             songImageView.setManaged(true);
           } catch (Exception e) {
-            System.err.println("Error loading image resource: " + resourcePath + " - " + e.getMessage());
+            System.err
+                .println("Error loading image resource: " + resourcePath + " - " + e.getMessage());
             // Keep image hidden if loading fails
             songImageView.setImage(null);
             songImageView.setVisible(false);
             songImageView.setManaged(false);
           }
         } else {
-          System.err.println("Image resource not found: " + resourcePath); // Log if resource not found
+          System.err.println("Image resource not found: " + resourcePath); // Log if resource not
+                                                                           // found
           songImageView.setImage(null);
           songImageView.setVisible(false);
           songImageView.setManaged(false);
@@ -152,7 +157,7 @@ public class Controller extends SceneController implements Initializable {
     mediaPlayerService.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
       Platform.runLater(() -> {
         // Update label of seeking state
-        currentTimeLabel.setText(formatDuration(newTime));
+        currentTimeLabel.setText(Formatter.formatDuration(newTime));
         // Update slider only if the user is NOT currently interacting with it
         if (!timeSlider.isValueChanging() && newTime != null && !newTime.isUnknown()) {
           Duration total = mediaPlayerService.totalDurationProperty().get();
@@ -168,7 +173,7 @@ public class Controller extends SceneController implements Initializable {
     // Listener for total duration change (updates label and slider max)
     mediaPlayerService.totalDurationProperty().addListener((obs, oldDuration, newDuration) -> {
       Platform.runLater(() -> {
-        totalDurationLabel.setText(formatDuration(newDuration));
+        totalDurationLabel.setText(Formatter.formatDuration(newDuration));
         if (newDuration != null && newDuration.greaterThan(Duration.ZERO)) {
           timeSlider.setMax(newDuration.toSeconds());
           timeSlider.setDisable(false);
@@ -195,7 +200,7 @@ public class Controller extends SceneController implements Initializable {
     timeSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
       // Optional: Update the current time label instantly while dragging
       if (timeSlider.isValueChanging()) {
-        currentTimeLabel.setText(formatDuration(Duration.seconds(newVal.doubleValue())));
+        currentTimeLabel.setText(Formatter.formatDuration(Duration.seconds(newVal.doubleValue())));
       }
     });
 
@@ -234,5 +239,27 @@ public class Controller extends SceneController implements Initializable {
     }
 
     mediaPlayerService.playSong(storageSongQueue.getCurrentSong());
+
+    goBackButton.setOnAction(event -> {
+      mediaPlayerService.stop();
+      try {
+        switchToScene2(event);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
+
+    initializeVolumeSettings();
+  }
+
+  private void initializeVolumeSettings() {
+    volumnSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+      mediaPlayerService.setVolume(newVal.doubleValue() / 100.0);
+      volumnPercentage.setText(String.format("%.0f%%", newVal.doubleValue()));
+    });
+
+    double initialVolume = mediaPlayerService.getCurrentVolume() * 100.0;
+    volumnSlider.setValue(initialVolume);
+    volumnPercentage.setText(String.format("%.0f%%", initialVolume));
   }
 }

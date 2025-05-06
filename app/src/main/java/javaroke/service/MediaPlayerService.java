@@ -33,8 +33,10 @@ public class MediaPlayerService {
   private final ObjectProperty<NodeSong> currentSongProperty = new SimpleObjectProperty<>(null);
   private final StringProperty currentLyricProperty = new SimpleStringProperty("...");
   // Wrappers for time properties
-  private final ReadOnlyObjectWrapper<Duration> currentTime = new ReadOnlyObjectWrapper<>(Duration.ZERO);
-  private final ReadOnlyObjectWrapper<Duration> totalDuration = new ReadOnlyObjectWrapper<>(Duration.ZERO);
+  private final ReadOnlyObjectWrapper<Duration> currentTime =
+      new ReadOnlyObjectWrapper<>(Duration.ZERO);
+  private final ReadOnlyObjectWrapper<Duration> totalDuration =
+      new ReadOnlyObjectWrapper<>(Duration.ZERO);
   // Wrapper for status property
   private final ReadOnlyObjectWrapper<Status> status = new ReadOnlyObjectWrapper<>(Status.UNKNOWN);
 
@@ -59,7 +61,7 @@ public class MediaPlayerService {
 
   // Getter for read-only status property
   public ReadOnlyObjectProperty<Status> statusProperty() {
-      return status.getReadOnlyProperty();
+    return status.getReadOnlyProperty();
   }
 
   public void setOnSongEndCallback(Runnable onSongEndCallback) {
@@ -93,7 +95,7 @@ public class MediaPlayerService {
 
         // Update internal status property based on MediaPlayer
         mediaPlayer.statusProperty().addListener((obs, oldStatus, newStatus) -> {
-            status.set(newStatus); // Update status wrapper
+          status.set(newStatus); // Update status wrapper
         });
 
         // Update internal time properties based on MediaPlayer
@@ -101,13 +103,13 @@ public class MediaPlayerService {
           if (newTime != null) {
             currentTime.set(newTime); // Update current time wrapper
           }
-          
+
           // Lyric update logic (remains the same)
           String currentLine = "...";
           for (int i = currentLyrics.size() - 1; i >= 0; i--) {
             // Use accessor methods time() and line() for the record
-            if (newTime.greaterThanOrEqualTo(currentLyrics.get(i).time())) { 
-              currentLine = currentLyrics.get(i).line(); 
+            if (newTime != null && newTime.greaterThanOrEqualTo(currentLyrics.get(i).time())) {
+              currentLine = currentLyrics.get(i).line();
               break;
             }
           }
@@ -118,20 +120,20 @@ public class MediaPlayerService {
 
         // Update total duration when ready
         mediaPlayer.setOnReady(() -> {
-            Duration duration = mediaPlayer.getMedia().getDuration();
-            if (duration != null && !duration.isUnknown() && !duration.isIndefinite()) {
-                totalDuration.set(duration);
-            } else {
-                totalDuration.set(Duration.ZERO); // Or handle appropriately
-            }
+          Duration duration = mediaPlayer.getMedia().getDuration();
+          if (duration != null && !duration.isUnknown() && !duration.isIndefinite()) {
+            totalDuration.set(duration);
+          } else {
+            totalDuration.set(Duration.ZERO); // Or handle appropriately
+          }
         });
         // Also listen for changes in duration property itself (might change)
         mediaPlayer.totalDurationProperty().addListener((obs, oldDuration, newDuration) -> {
-             if (newDuration != null && !newDuration.isUnknown() && !newDuration.isIndefinite()) {
-                totalDuration.set(newDuration);
-            } else {
-                totalDuration.set(Duration.ZERO);
-            }
+          if (newDuration != null && !newDuration.isUnknown() && !newDuration.isIndefinite()) {
+            totalDuration.set(newDuration);
+          } else {
+            totalDuration.set(Duration.ZERO);
+          }
         });
 
 
@@ -150,7 +152,8 @@ public class MediaPlayerService {
         status.set(Status.PLAYING); // Set initial status
 
       } catch (Exception e) {
-        System.err.println("Error setting up MediaPlayer for " + mp3ResourcePath + ": " + e.getMessage());
+        System.err
+            .println("Error setting up MediaPlayer for " + mp3ResourcePath + ": " + e.getMessage());
         Platform.runLater(() -> currentLyricProperty.set("Error playing song."));
       }
     } else {
@@ -172,40 +175,43 @@ public class MediaPlayerService {
   }
 
   public void togglePlayPause() {
-      if (mediaPlayer != null) {
-          Status currentStatus = status.get();
-          if (currentStatus == Status.PLAYING) {
-              mediaPlayer.pause();
-          } else if (currentStatus == Status.PAUSED || currentStatus == Status.READY || currentStatus == Status.STOPPED) {
-              // Allow playing from PAUSED, READY, or even STOPPED (will restart if stopped)
-              mediaPlayer.play();
-          }
-          // Status property will be updated by the listener we added
+    if (mediaPlayer != null) {
+      Status currentStatus = status.get();
+      if (currentStatus == Status.PLAYING) {
+        mediaPlayer.pause();
+      } else if (currentStatus == Status.PAUSED || currentStatus == Status.READY
+          || currentStatus == Status.STOPPED) {
+        // Allow playing from PAUSED, READY, or even STOPPED (will restart if stopped)
+        mediaPlayer.play();
       }
+      // Status property will be updated by the listener we added
+    }
   }
 
   public void seek(Duration duration) {
     if (mediaPlayer != null) {
-        Status status = mediaPlayer.getStatus();
-        // Allow seeking only when playing, paused, or ready
-        if (status == Status.PLAYING || status == Status.PAUSED || status == Status.READY) {
-            if (duration != null && duration.greaterThanOrEqualTo(Duration.ZERO)) {
-                Duration total = totalDuration.get();
-                // Ensure seek time is within bounds
-                if (total != null && total.greaterThan(Duration.ZERO) && duration.lessThanOrEqualTo(total)) {
-                    mediaPlayer.seek(duration);
-                    // Update currentTime immediately after seek for responsiveness
-                    currentTime.set(duration); 
-                } else if (total != null && total.greaterThan(Duration.ZERO) && duration.greaterThan(total)) {
-                    // If seeking past the end, seek to the end
-                    mediaPlayer.seek(total);
-                    currentTime.set(total);
-                } else {
-                     mediaPlayer.seek(duration); // Seek even if total duration is unknown
-                     currentTime.set(duration);
-                }
-            }
+      Status status = mediaPlayer.getStatus();
+      // Allow seeking only when playing, paused, or ready
+      if (status == Status.PLAYING || status == Status.PAUSED || status == Status.READY) {
+        if (duration != null && duration.greaterThanOrEqualTo(Duration.ZERO)) {
+          Duration total = totalDuration.get();
+          // Ensure seek time is within bounds
+          if (total != null && total.greaterThan(Duration.ZERO)
+              && duration.lessThanOrEqualTo(total)) {
+            mediaPlayer.seek(duration);
+            // Update currentTime immediately after seek for responsiveness
+            currentTime.set(duration);
+          } else if (total != null && total.greaterThan(Duration.ZERO)
+              && duration.greaterThan(total)) {
+            // If seeking past the end, seek to the end
+            mediaPlayer.seek(total);
+            currentTime.set(total);
+          } else {
+            mediaPlayer.seek(duration); // Seek even if total duration is unknown
+            currentTime.set(duration);
+          }
         }
+      }
     }
   }
 
@@ -239,18 +245,38 @@ public class MediaPlayerService {
             }
           }
           // Use accessor method time() for sorting
-          currentLyrics.sort((l1, l2) -> l1.time().compareTo(l2.time())); 
+          currentLyrics.sort((l1, l2) -> l1.time().compareTo(l2.time()));
         }
       } catch (IOException e) {
-        System.err.println("Error reading lyric resource: " + jsonResourcePath + " - " + e.getMessage());
+        System.err
+            .println("Error reading lyric resource: " + jsonResourcePath + " - " + e.getMessage());
         Platform.runLater(() -> currentLyricProperty.set("Error loading lyrics."));
       } catch (JsonSyntaxException e) {
-        System.err.println("Error parsing JSON resource: " + jsonResourcePath + " - " + e.getMessage());
+        System.err
+            .println("Error parsing JSON resource: " + jsonResourcePath + " - " + e.getMessage());
         Platform.runLater(() -> currentLyricProperty.set("Error parsing lyrics."));
       }
     } else {
       System.err.println("Lyric resource not found: " + jsonResourcePath);
       Platform.runLater(() -> currentLyricProperty.set("Lyrics not found."));
+    }
+  }
+
+  public double getCurrentVolume() {
+    if (mediaPlayer != null) {
+      return mediaPlayer.getVolume();
+    }
+    return 0.0;
+  }
+
+  public void setVolume(double volume) {
+    if (mediaPlayer != null) {
+      if (volume < 0.0) {
+        volume = 0.0;
+      } else if (volume > 1.0) {
+        volume = 1.0;
+      }
+      mediaPlayer.setVolume(volume);
     }
   }
 }
