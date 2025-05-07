@@ -81,4 +81,5 @@
 #songImageView {
     -fx-fit-height: 500px;
     -fx-fit-width: 500px;
+    /* -fx-translate-y: -300px; */
 }

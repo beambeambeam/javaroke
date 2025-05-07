@@ -13,9 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="root"
-  xmlns="http://javafx.com/javafx/23.0.1"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.play.Controller">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaroke.gui.play.Controller">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="318.1011047363281" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="481.8988952636719" />
@@ -43,7 +41,7 @@
             <Button fx:id="nextButton" mnemonicParsing="false" onAction="#handleNextSong" styleClass="button" text="Next" />
           </children>
         </HBox>
-        <Button fx:id="goBackButton" mnemonicParsing="false" text="Go back" />
+            <Button fx:id="goBackButton" mnemonicParsing="false" text="Go back" />
       </children>
     </VBox>
     <GridPane GridPane.columnIndex="1">
@@ -126,17 +124,17 @@
             <Insets left="10.0" right="10.0" />
           </VBox.margin>
         </ListView>
-        <VBox>
-          <children>
-            <HBox spacing="12.0">
-              <children>
-                <Label text="Volume" />
-                <Label fx:id="volumnPercentage" text="0%" />
-              </children>
-            </HBox>
-            <Slider fx:id="volumnSlider" />
-          </children>
-        </VBox>
+            <VBox>
+               <children>
+                  <HBox spacing="12.0">
+                     <children>
+                        <Label text="Volumns" />
+                        <Label fx:id="volumnPercentage" text="0%" />
+                     </children>
+                  </HBox>
+                  <Slider fx:id="volumnSlider" />
+               </children>
+            </VBox>
       </children>
     </VBox>
   </children>
