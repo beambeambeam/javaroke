@@ -16,11 +16,13 @@ public class SongQueue{
         this.currentSong = null;
     }
 
+    //Add song to queue (get only songID)
     public void addSong(String songId){
         NodeSong newSong = new NodeSong(songId, "Unknown Title", "Unknown Artist", 0);
         queue.enqueue(newSong);
     }
 
+    //Remove song from queue and put in history(stack)
     public NodeSong removeSong(){
         NodeSong song = queue.dequeue();
         if(song != null){
@@ -30,21 +32,23 @@ public class SongQueue{
         return song;
     }
 
+    //Return the currently playing song
     public NodeSong getCurrentSong(){
         return currentSong;
     }
 
+    //Show history of song that have been played (stack)
     public void historySong() {
         System.out.println("Play History:");
-        if (history.isEmpty()) {
+        if(history.isEmpty()){
             System.out.println("No songs played yet.");
-        } else {
+        }else{
             StackSong tempStack = new StackSong();
-            while (!history.isEmpty()) {
+            while(!history.isEmpty()){
                 NodeSong song = history.pop();
                 tempStack.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
             }
-            while (!tempStack.isEmpty()) {
+            while(!tempStack.isEmpty()){
                 NodeSong song = tempStack.pop();
                 System.out.println("- " + song.getSongId());
                 history.push(song.getSongId(), song.getTitle(), song.getArtist(), song.getDuration());
@@ -52,12 +56,13 @@ public class SongQueue{
         }
     }
     
-    public void displayQueue() {
+    //Show all songs in queue
+    public void displayQueue(){
         System.out.println("Song Queue:");
-        if (queue.isEmpty()) {
+        if(queue.isEmpty()) {
             System.out.println("Queue is empty.");
-        } else {
-            for (NodeSong song : queue) {
+        }else{
+            for(NodeSong song : queue){
                 System.out.println("- " + song.getSongId());
             }
         }
