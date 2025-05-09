@@ -4,13 +4,21 @@ import java.util.List;
 import java.util.Queue;
 import javaroke.gui.search.Item;
 import javaroke.recommendation.core.models.items.MyPair;
+import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixPrinter;
 import javaroke.recommendation.core.utils.tranformers.SongIdTransformers;
 
 public class RecommendSystem {
     private static HashMapGraphController graphController = null;
 
     public static void initialize() {
-        graphController = new HashMapGraphController("graph.json", "v1");
+        graphController = new HashMapGraphController("v1");
+    }
+
+    public static void forceLoad(String loadFileName) {
+        if (graphController == null)
+            initialize();
+        graphController.forceLoadGraph(loadFileName);
+        graphController.process();
     }
 
     public static void process() {
@@ -36,5 +44,19 @@ public class RecommendSystem {
         if (graphController == null)
             initialize();
         return SongIdTransformers.changeSongIdToItem(getRecommendationList());
+    }
+
+    public static void printAdjacencyMetrix() {
+        if (graphController == null)
+            initialize();
+        AdjacencyMatrixPrinter
+                .printAdjacencyMatrix(graphController.getGraph().getAdjacencyMatrix());
+    }
+
+    public static void printPrevoiusVertexMetrix() {
+        if (graphController == null)
+            initialize();
+        AdjacencyMatrixPrinter
+                .printPreviousVertexMatrix(graphController.getGraph().getPreviousVertexMatrix());
     }
 }

@@ -3,12 +3,14 @@ package javaroke.recommendation.tests;
 import java.util.LinkedList;
 import java.util.Queue;
 import javaroke.recommendation.controllers.HashMapGraphController;
+import javaroke.recommendation.controllers.RecommendSystem;
 import javaroke.recommendation.core.models.items.MyPair;
 import javaroke.recommendation.core.utils.GraphReading.AdjacencyMatrixPrinter;
 
 public class RecommendationTest {
         public static void main(String[] args) {
-                MainControllerTest.test();
+                RecommendSystem.forceLoad("graph.json");
+                // MainControllerTest.test();
                 // test2();
         }
 

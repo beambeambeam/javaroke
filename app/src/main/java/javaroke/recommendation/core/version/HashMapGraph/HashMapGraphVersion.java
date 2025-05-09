@@ -35,6 +35,8 @@ public abstract class HashMapGraphVersion {
 
     public abstract List<String> getRecommendationsList(HashMapGraph graph);
 
-    public abstract List<String> getRecommendationsList(HashMapGraph graph, String src,
+    public abstract List<String> getRecommendationsList(HashMapGraph graph, String src);
+
+    public abstract List<String> getRecommendationsListPath(HashMapGraph graph, String src,
             String dest);
 }
