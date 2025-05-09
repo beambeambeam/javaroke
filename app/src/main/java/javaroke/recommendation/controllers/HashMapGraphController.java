@@ -42,7 +42,12 @@ public class HashMapGraphController {
         try {
             this.graph = loadGraph(loadFileName);
             LOGGER.log(Level.INFO, "Loaded graph successfully from: {0}", loadFileName);
+        } catch (Exception e) {
+            this.graph = new HashMapGraph();
+            LOGGER.log(Level.INFO, "Load Graph Failed: " + e.getMessage(), e);
+        }
 
+        try {
             this.version = loadVersion(version);
             LOGGER.log(Level.INFO, "Loaded version successfully: {0}", version);
 
@@ -133,6 +138,19 @@ public class HashMapGraphController {
         String path = resolvePath(fileName);
         HashMapGraphIO.saveGraphHashMap(graph, path);
         tracker.recordUpdateTime(System.currentTimeMillis() - start, graph.size);
+    }
+
+    public void forceLoadGraph(String loadFileName) {
+        try {
+            this.graph = loadGraph(loadFileName);
+            LOGGER.log(Level.INFO, "Force Loaded graph successfully from: {0}", loadFileName);
+
+            saveGraph(ORIGINAL_GRAPH_FILE);
+            LOGGER.log(Level.INFO, "Force save graph successfully to: {0}", ORIGINAL_GRAPH_FILE);
+        } catch (Exception e) {
+            this.graph = new HashMapGraph();
+            LOGGER.log(Level.INFO, "Force Load Graph Failed: " + e.getMessage(), e);
+        }
     }
 
     private HashMapGraph loadGraph(String fileName) throws Exception {

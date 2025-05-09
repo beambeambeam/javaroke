@@ -6,13 +6,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.google.gson.stream.JsonReader;
 import javaroke.gui.search.Item;
 import javaroke.recommendation.controllers.ControllerConfigLoader;
 import com.google.gson.*;
 
 public class SongIdTransformers {
-
+    private final static Logger LOGGER = Logger.getLogger(SongIdTransformers.class.getName());
 
     public static List<Item> changeSongIdToItem(List<String> songList) {
         String SONG_FOLDER = ControllerConfigLoader.get("SONG_FOLDER");
@@ -21,9 +23,12 @@ public class SongIdTransformers {
 
         for (String songId : songList) {
             try {
-                Path file = Paths.get(SONG_FOLDER, songId + ".json");
-                if (!Files.exists(file))
+                Path file = Paths.get(SONG_FOLDER, songId, songId + ".json");
+                if (!Files.exists(file)) {
+                    LOGGER.log(Level.INFO, "Cannot find song Item: {0}",
+                            Paths.get(SONG_FOLDER, songId + ".json"));
                     continue;
+                }
 
                 JsonReader jr =
                         new JsonReader(Files.newBufferedReader(file, StandardCharsets.UTF_8));
@@ -38,7 +43,7 @@ public class SongIdTransformers {
 
                 itemList.add(new Item(id, title, artist));
             } catch (Exception e) {
-                e.printStackTrace(); // It's good practice to log or print errors during parsing
+                LOGGER.log(Level.SEVERE, "Find Item by songId failed: " + e.getMessage(), e);
             }
         }
 
